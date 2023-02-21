@@ -27,8 +27,9 @@
 <meta property="og:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/AMNAMPClass.png">
 <meta property="og:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/IAPClass.png">
 <meta property="og:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS2.png">
+<meta property="og:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/newThread.png">
 <meta property="article:published_time" content="2023-02-21T01:42:10.000Z">
-<meta property="article:modified_time" content="2023-02-21T09:20:22.414Z">
+<meta property="article:modified_time" content="2023-02-21T11:46:02.666Z">
 <meta property="article:author" content="Ancen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS.png">
@@ -228,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k 字
+          4.8k 字
         
       </span>
     
@@ -239,7 +240,7 @@
         
         
         
-          25 分钟
+          40 分钟
         
       </span>
     
@@ -345,10 +346,40 @@
 <p>Binder（也就是AMN&#x2F;AMP）和AMS通信，希望启动App，发送类型为START_ACTIVITY的请求给AMS，同时会告诉AMS要启动哪个Activity。</p>
 <p>AMS检查App中的AndroidManifest文件，是否存在要启动的Activity。</p>
 <p><img src="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/IAPClass.png" srcset="/img/loading.gif" lazyload></p>
-<p>AMS通知Launcher，Launcher完成使命。Launcher以及它所在的进程在AMS这边保存为一个ActivityRecord对象，该对象里面有一个ApplicationThreadProxy，ApplicationThread的代理对象。</p>
+<p>AMS通知Launcher，Launcher完成传递使命了，可以休眠了。Launcher以及它所在的进程在AMS这边保存为一个ActivityRecord对象，该对象里面有一个ApplicationThreadProxy，ApplicationThread的代理对象。</p>
 <p>AMS通过ApplicationThreadProxy发送消息，而App端则通过ApplicationThread来接收这个消息。</p>
 <h2 id="Launcher休眠并通知AMS"><a href="#Launcher休眠并通知AMS" class="headerlink" title="Launcher休眠并通知AMS"></a>Launcher休眠并通知AMS</h2><p><img src="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS2.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="AMS启动新的进程"><a href="#AMS启动新的进程" class="headerlink" title="AMS启动新的进程"></a>AMS启动新的进程</h2><h1 id="App内部的页面跳转"><a href="#App内部的页面跳转" class="headerlink" title="App内部的页面跳转"></a>App内部的页面跳转</h1><p>从ActivityA跳转到ActivityB，可以把ActivityA当作Launcher，这个过程不需要重新启动一个新的进程，可以简化流程。</p>
+<p>ApplicationThread（APT）接收到来自AMS的消息后，调用ActivityThread（主线程）的sendMessage方法，向Launcher的主线程消息队列发送一个PAUSE_ACTIVITY消息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sendMessage</span><span class="hljs-params">(<span class="hljs-type">int</span> what, Object obj, <span class="hljs-type">int</span> arg, ...)</span> &#123;<br>    <span class="hljs-keyword">if</span> (DEBUG_MESSAGES)<br>        Slog.v(TAG, <span class="hljs-string">&quot;SCHEDULE &quot;</span> + what + <span class="hljs-string">&quot; &quot;</span> + mH.codeToString(what)<br>               + <span class="hljs-string">&quot;: &quot;</span> + arg1 + <span class="hljs-string">&quot; / &quot;</span> + obj);<br>    <span class="hljs-type">Message</span> <span class="hljs-variable">msg</span> <span class="hljs-operator">=</span> Message.obtain();<br>    msg.what = what;<br>    msg.obj = obj;<br>    msg.arg1 = arg1;<br>    msg.arg2 = arg2;<br>    <span class="hljs-keyword">if</span> (async) &#123;<br>        msg.setAsynchronous(<span class="hljs-literal">true</span>);<br>    &#125;<br>    mH.sendMessage(msg);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>发送消息是通过一个名为<strong>H</strong>的Handler类的完成。AMS给Activity发送的所有消息，以及给其他三大组件发送的所有消息，都从H这里经过（switch … case …做处理）。</p>
+<blockquote>
+<p>那么可以在这里做插件化技术。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ActivityThread</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">H</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Handler</span> &#123;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">handleMessage</span><span class="hljs-params">(Message msg)</span> &#123;<br>        <span class="hljs-keyword">if</span> (DEBUG_MESSAGES) Slog.v(TAG, <span class="hljs-string">&quot;&gt;&gt;&gt; handling: &quot;</span> + codeToString(msg.what));<br>        <span class="hljs-keyword">switch</span> (msg.what) &#123;<br>            <span class="hljs-keyword">case</span> PAUSE_ACTIVITY:<br>                Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="hljs-string">&quot;activityPause&quot;</span>);<br>                handlePauseActivity((IBinder)msg.obj, <span class="hljs-literal">false</span>, (msg.arg1&amp;<span class="hljs-number">1</span>) != <span class="hljs-number">0</span>, msg.arg2, (msg.arg1&amp;<span class="hljs-number">2</span>) != <span class="hljs-number">0</span>);<br>                maybeSnapshot();<br>                Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);<br>                <span class="hljs-keyword">break</span>;<br>        &#125;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>H对PAUSE_ACTIVITY消息的处理，是调用ActivityThread的handlePauseActivity方法，该方法</p>
+<ul>
+<li>ActivityThread里面有一个mActivities集合，保存当前App也就是Launcher中所有打开的Activity，把它找出来，让它休眠；</li>
+<li>通过AMP通知AMS，已经休眠。</li>
+</ul>
+<blockquote>
+<p>H和APT都是ActivityThread的内嵌类，无类文件。</p>
+</blockquote>
+<p>以上，Launcher的工作完成了。</p>
+<h2 id="AMS启动新的进程"><a href="#AMS启动新的进程" class="headerlink" title="AMS启动新的进程"></a>AMS启动新的进程</h2><p>AMS接下来要启动App的首页，App不在后台进程中，所以要启动一个新的进程。Process.start方法，并且指定了ActivityThread的main函数为入口函数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-variable">pid</span> <span class="hljs-operator">=</span> Process.start(“android.app.ActivityThread”, mSimpleProcessManagement ? app.processName : gid, debugFl ...)<br></code></pre></td></tr></table></figure>
+
+<h2 id="启动新的进程"><a href="#启动新的进程" class="headerlink" title="启动新的进程"></a>启动新的进程</h2><p>以ActivityThread的main函数作为入口。</p>
+<p>启动新进程，其实就是启动一个新的App。</p>
+<p><img src="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/newThread.png" srcset="/img/loading.gif" lazyload></p>
+<p>在启动新进程的时候，为这个进程创建<br>ActivityThread对象，这就是我们耳熟能详的主线程（UI线程）。创建好UI线程后，立刻进入ActivityThread的main函数，</p>
+<ul>
+<li>创建一个主线程Looper，也就是MainLooper；</li>
+<li>创建Application。</li>
+</ul>
+<p>主线程在收到BIND_APPLICATION消息后，根据传递过来的ApplicationInfo创建一个对应的LoadedApk对象（标志当前APK信息），然后创建ContextImpl对象（标志当前进程的环境），紧接着通过反射创建目标Application，并调用其attach方法，将ContextImpl对象设置为目标Application的上</p>
+<h1 id="App内部的页面跳转"><a href="#App内部的页面跳转" class="headerlink" title="App内部的页面跳转"></a>App内部的页面跳转</h1><p>从ActivityA跳转到ActivityB，可以把ActivityA当作Launcher，这个过程不需要重新启动一个新的进程，可以简化流程。</p>
 
                 
               </div>
