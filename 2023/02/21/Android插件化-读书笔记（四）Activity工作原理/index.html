@@ -18,31 +18,31 @@
   
     <meta name="description" content="AMS管理Activity，作为Binder模型中的Server。  Q：App的安装过程，为什么不直接把Apk解压缩到本地。 待解答。   Q：为什么Hook永远是在Binder Client端，也就是四大组件这边，而不是在AMS边进行Hook。 AMS要负责和所有App的四大组件进行通信，Hook易导致功能停止。 而在Client端做Hook，只影响Hook代码所在的App。  App启动 A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《Android插件化》读书笔记（四）Activity工作原理">
-<meta property="og:url" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:title" content="Android插件化 读书笔记（四）Activity工作原理">
+<meta property="og:url" content="https://ancen.blog/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="Ancenの小屋">
 <meta property="og:description" content="AMS管理Activity，作为Binder模型中的Server。  Q：App的安装过程，为什么不直接把Apk解压缩到本地。 待解答。   Q：为什么Hook永远是在Binder Client端，也就是四大组件这边，而不是在AMS边进行Hook。 AMS要负责和所有App的四大组件进行通信，Hook易导致功能停止。 而在Client端做Hook，只影响Hook代码所在的App。  App启动 A">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS.png">
-<meta property="og:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/AMNAMPClass.png">
-<meta property="og:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/IAPTClass.png">
-<meta property="og:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS2.png">
-<meta property="og:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/newThread.png">
+<meta property="og:image" content="https://ancen.blog/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS.png">
+<meta property="og:image" content="https://ancen.blog/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/AMNAMPClass.png">
+<meta property="og:image" content="https://ancen.blog/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/IAPTClass.png">
+<meta property="og:image" content="https://ancen.blog/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS2.png">
+<meta property="og:image" content="https://ancen.blog/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/newThread.png">
 <meta property="og:image" content="https://ancen.blog/startFirstActivity.png">
-<meta property="og:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/ActivityThreadwithH.png">
+<meta property="og:image" content="https://ancen.blog/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/ActivityThreadwithH.png">
 <meta property="article:published_time" content="2023-02-21T01:42:10.000Z">
-<meta property="article:modified_time" content="2023-02-22T14:58:19.977Z">
+<meta property="article:modified_time" content="2023-02-23T06:07:34.952Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Activity">
 <meta property="article:tag" content="Plug-in">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ancen.blog/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS.png">
+<meta name="twitter:image" content="https://ancen.blog/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS.png">
   
   
   
-  <title>《Android插件化》读书笔记（四）Activity工作原理 - Ancenの小屋</title>
+  <title>Android插件化 读书笔记（四）Activity工作原理 - Ancenの小屋</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="《Android插件化》读书笔记（四）Activity工作原理"></span>
+            <span id="subtitle" data-typed-text="Android插件化 读书笔记（四）Activity工作原理"></span>
           
         </div>
 
@@ -284,7 +284,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">《Android插件化》读书笔记（四）Activity工作原理</h1>
+            <h1 style="display: none">Android插件化 读书笔记（四）Activity工作原理</h1>
             
             
               <div class="markdown-body">
@@ -315,7 +315,7 @@
 <figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sqf">&lt;<span class="hljs-built_in">action</span> android:<span class="hljs-built_in">name</span>=<span class="hljs-string">&quot;android.intent.action.MAIN&quot;</span> /&gt;<br>&lt;category android:<span class="hljs-built_in">name</span>=<span class="hljs-string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;<br>cmp：该App包名 + 首页Activity名<br></code></pre></td></tr></table></figure>
 
 <p>而该App的AndroidManifest文件中，也在首页Activity的<code>&lt;intent-filter&gt;</code>指定action和category。</p>
-<p><img src="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS.png" srcset="/img/loading.gif" lazyload></p>
 <p>startActivity，调用startActivityForResult。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// -1：不关心App是否启动成功的返回结果</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">startActivity</span><span class="hljs-params">(Intent intent, ...)</span> &#123;<br>    startActivityForResult(intent, -<span class="hljs-number">1</span>, options);<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -342,7 +342,7 @@
 <blockquote>
 <p>AMN的getDefault方法返回类型为IActivityManager，而不是AMP。IActivityManager是一个实现了IInterface的接口，里面定义了四大组件所有的生命周期。</p>
 </blockquote>
-<p><img src="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/AMNAMPClass.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/AMNAMPClass.png" srcset="/img/loading.gif" lazyload></p>
 <p>AMN和AMP都实现了IActivityManager接口，AMS继承自AMN，<strong>AIDL</strong>。</p>
 <h3 id="AMP-startActivity"><a href="#AMP-startActivity" class="headerlink" title="AMP startActivity"></a>AMP startActivity</h3><p>AMP的startActivity和AIDL的Proxy方法一样，写入数据到另一个进程，也就是AMS，然后等待AMS返回结果。</p>
 <h2 id="AMS处理Launcher传过来的信息"><a href="#AMS处理Launcher传过来的信息" class="headerlink" title="AMS处理Launcher传过来的信息"></a>AMS处理Launcher传过来的信息</h2><blockquote>
@@ -351,10 +351,10 @@
 <p>Binder的Server端在做事情，过程如下。</p>
 <p>Binder（也就是AMN&#x2F;AMP）和AMS通信，希望启动App，发送类型为START_ACTIVITY的请求给AMS，同时会告诉AMS要启动哪个Activity。</p>
 <p>AMS检查App中的AndroidManifest文件，是否存在要启动的Activity。</p>
-<p><img src="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/IAPTClass.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/IAPTClass.png" srcset="/img/loading.gif" lazyload></p>
 <p>AMS通知Launcher，Launcher完成传递使命了，可以休眠了。Launcher以及它所在的进程在AMS这边保存为一个ActivityRecord对象，该对象里面有一个ApplicationThreadProxy，ApplicationThread的代理对象。</p>
 <p>AMS通过ApplicationThreadProxy发送消息，而App端则通过ApplicationThread来接收这个消息。</p>
-<h2 id="Launcher休眠并通知AMS"><a href="#Launcher休眠并通知AMS" class="headerlink" title="Launcher休眠并通知AMS"></a>Launcher休眠并通知AMS</h2><p><img src="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS2.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Launcher休眠并通知AMS"><a href="#Launcher休眠并通知AMS" class="headerlink" title="Launcher休眠并通知AMS"></a>Launcher休眠并通知AMS</h2><p><img src="/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/launcher2AMS2.png" srcset="/img/loading.gif" lazyload></p>
 <p>ApplicationThread（APT）接收到来自AMS的消息后，调用ActivityThread（主线程）的sendMessage方法，向Launcher的主线程消息队列发送一个PAUSE_ACTIVITY消息。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sendMessage</span><span class="hljs-params">(<span class="hljs-type">int</span> what, Object obj, <span class="hljs-type">int</span> arg, ...)</span> &#123;<br>    <span class="hljs-keyword">if</span> (DEBUG_MESSAGES)<br>        Slog.v(TAG, <span class="hljs-string">&quot;SCHEDULE &quot;</span> + what + <span class="hljs-string">&quot; &quot;</span> + mH.codeToString(what)<br>               + <span class="hljs-string">&quot;: &quot;</span> + arg1 + <span class="hljs-string">&quot; / &quot;</span> + obj);<br>    <span class="hljs-type">Message</span> <span class="hljs-variable">msg</span> <span class="hljs-operator">=</span> Message.obtain();<br>    msg.what = what;<br>    msg.obj = obj;<br>    msg.arg1 = arg1;<br>    msg.arg2 = arg2;<br>    <span class="hljs-keyword">if</span> (async) &#123;<br>        msg.setAsynchronous(<span class="hljs-literal">true</span>);<br>    &#125;<br>    mH.sendMessage(msg);<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -377,7 +377,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-variable">pid</span> <span class="hljs-operator">=</span> Process.start(“android.app.ActivityThread”, mSimpleProcessManagement ? app.processName : gid, debugFl ...)<br></code></pre></td></tr></table></figure>
 
 <p>新的进程启动，以ActivityThread的main函数作为入口。启动新进程，其实就是启动一个新的App。</p>
-<p><img src="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/newThread.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/newThread.png" srcset="/img/loading.gif" lazyload></p>
 <p>在启动新进程的时候，为这个进程创建ActivityThread对象，即主线程（UI线程）。创建好UI线程后，立刻进入ActivityThread的main函数，创建一个主线程Looper，也就是MainLooper，创建Application。</p>
 <p>主线程在收到BIND_APPLICATION消息后，根据传递过来的ApplicationInfo创建一个对应的LoadedApk对象（标志当前APK信息），然后创建ContextImpl对象（标志当前进程的环境），紧接着通过反射创建目标Application，并调用其attach方法，将ContextImpl对象设置为目标Application的上下文环境，最后调用Application的onCreate函数，做一些初始工作。</p>
 <blockquote>
@@ -399,7 +399,7 @@
 <p>这个地方也是插件化技术渗入的一个点。</p>
 </blockquote>
 <p>在H的这个分支中，又反过来回调ActivityThread的handleLaunchActivity方法。</p>
-<p><img src="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/ActivityThreadwithH.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89Activity%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/ActivityThreadwithH.png" srcset="/img/loading.gif" lazyload></p>
 <p>每次都是APT执行ActivityThread的sendMessage方法，在这个方法中，把消息拼装一下，然后扔给H的swicth语句分析，决定要执行ActivityThread的那个方法。</p>
 <p>handleLaunchActivity通过Instrumentation的newActivity方法，创建要启动的Activity实例；为这个Activity创建一个上下文Context对象，并与Activity进行关联；通过Instrumentation的callActivityOnCreate方法，执行Activity的onCreate方法，从而启动Activity。</p>
 <p>至此，App启动完毕。这个流程经过了很多次握手，App和ASM频繁地向对方发送消息，而发送消息的机制，是建立在Binder的基础之上的。</p>
@@ -455,8 +455,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>《Android插件化》读书笔记（四）Activity工作原理</div>
-      <div>https://ancen.blog/2023/02/21/《Android插件化》读书笔记（四）Activity工作原理/</div>
+      <div>Android插件化 读书笔记（四）Activity工作原理</div>
+      <div>https://ancen.blog/2023/02/21/Android插件化-读书笔记（四）Activity工作原理/</div>
     </div>
     <div class="license-meta">
       
@@ -500,9 +500,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E8%B7%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1/" title="《Android插件化》读书笔记（五）跨进程通信">
+                      <a href="/2023/02/21/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E8%B7%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1/" title="Android插件化 读书笔记（五）跨进程通信">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">《Android插件化》读书笔记（五）跨进程通信</span>
+                        <span class="hidden-mobile">Android插件化 读书笔记（五）跨进程通信</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -510,8 +510,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/20/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E5%B0%81%E8%A3%85%E5%8F%8D%E5%B0%84%E8%AF%AD%E6%B3%95/" title="《Android插件化》读书笔记（三）封装反射语法">
-                        <span class="hidden-mobile">《Android插件化》读书笔记（三）封装反射语法</span>
+                      <a href="/2023/02/20/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E5%B0%81%E8%A3%85%E5%8F%8D%E5%B0%84%E8%AF%AD%E6%B3%95/" title="Android插件化 读书笔记（三）封装反射语法">
+                        <span class="hidden-mobile">Android插件化 读书笔记（三）封装反射语法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
