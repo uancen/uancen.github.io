@@ -16,24 +16,22 @@
   <meta name="author" content="Ancen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="当涉及维护时，为了复用（reuse）目的而是用继承，结局不一定好；子类不同方法都需要特意维护。用接口，则代码无法复用（接口不具有实现代码），方法修改时，所有子类都需要修改。  采用良好的OO软件设计原则。找出应用中可能需要变化的地方，把它们独立出来，不要和那些不需要变化的代码混在一起。总是封装可能会变化的部分，以便以后可以轻松修改此部分。">
+    <meta name="description" content="操作系统定义 没有定义！OS&#x3D;&#x3D;OS的“全部”。  Operating System A body of software, in fact, that is responsible for making it easy to run programs (even allowing you to seemingly run many at the same time), all">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《Head First Design Patterns》读书笔记（一）欢迎来到设计模式">
-<meta property="og:url" content="https://ancen.blog/2023/02/19/%E3%80%8AHead-First-Design-Patterns%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="NJU OS 学习笔记（一）绪论">
+<meta property="og:url" content="https://ancen.blog/2023/02/22/NJU-OS-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E7%BB%AA%E8%AE%BA/index.html">
 <meta property="og:site_name" content="Ancenの小屋">
-<meta property="og:description" content="当涉及维护时，为了复用（reuse）目的而是用继承，结局不一定好；子类不同方法都需要特意维护。用接口，则代码无法复用（接口不具有实现代码），方法修改时，所有子类都需要修改。  采用良好的OO软件设计原则。找出应用中可能需要变化的地方，把它们独立出来，不要和那些不需要变化的代码混在一起。总是封装可能会变化的部分，以便以后可以轻松修改此部分。">
+<meta property="og:description" content="操作系统定义 没有定义！OS&#x3D;&#x3D;OS的“全部”。  Operating System A body of software, in fact, that is responsible for making it easy to run programs (even allowing you to seemingly run many at the same time), all">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-19T15:27:58.000Z">
-<meta property="article:modified_time" content="2023-02-19T15:59:47.277Z">
+<meta property="article:published_time" content="2023-02-22T13:35:45.000Z">
+<meta property="article:modified_time" content="2023-02-22T15:04:05.785Z">
 <meta property="article:author" content="Ancen">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="Design Patterns">
-<meta property="article:tag" content="OOP">
+<meta property="article:tag" content="Operating System">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>《Head First Design Patterns》读书笔记（一）欢迎来到设计模式 - Ancenの小屋</title>
+  <title>NJU OS 学习笔记（一）绪论 - Ancenの小屋</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="《Head First Design Patterns》读书笔记（一）欢迎来到设计模式"></span>
+            <span id="subtitle" data-typed-text="NJU OS 学习笔记（一）绪论"></span>
           
         </div>
 
@@ -214,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-19 23:27" pubdate>
-          2023年2月19日 晚上
+        <time datetime="2023-02-22 21:35" pubdate>
+          2023年2月22日 晚上
         </time>
       </span>
     
@@ -226,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          168 字
+          2.6k 字
         
       </span>
     
@@ -237,7 +235,7 @@
         
         
         
-          2 分钟
+          22 分钟
         
       </span>
     
@@ -275,15 +273,41 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">《Head First Design Patterns》读书笔记（一）欢迎来到设计模式</h1>
+            <h1 style="display: none">NJU OS 学习笔记（一）绪论</h1>
             
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>当涉及维护时，为了复用（reuse）目的而是用继承，结局不一定好；子类不同方法都需要特意维护。用接口，则代码无法复用（接口不具有实现代码），方法修改时，所有子类都需要修改。</p>
+                <h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>没有定义！OS&#x3D;&#x3D;OS的“全部”。</p>
 </blockquote>
-<p>采用良好的OO软件设计原则。<strong>找出应用中可能需要变化的地方，把它们独立出来，不要和那些不需要变化的代码混在一起。</strong>总是封装可能会变化的部分，以便以后可以轻松修改此部分。</p>
+<p>Operating System</p>
+<p>A body of software, in fact, that is responsible for <em>making it easy to run programs</em> (even allowing you to seemingly run many at the same time), allowing programs to share memory, enabling programs to interact with devices, and other fun stuff like that.</p>
+<h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p>Hardware</p>
+<p>计算机硬件（电路）；公理系统。</p>
+<p>Software</p>
+<p><strong>.c -&gt; .s -&gt; .o -&gt; a.out</strong>（视角一）穿过OS，<strong>计算机执行指令序列（ISA）</strong>（视角二）。</p>
+<p>举例，CPU（RISC-V）模拟器，取出指令并执行；<a href="#%E9%B8%A1%E5%85%94%E5%90%8C%E7%AC%BC%E9%97%AE%E9%A2%98">解决鸡兔同笼问题</a>。</p>
+<p><strong>操作系统，狭义，硬件和软件的中间层（自然管理了软件、硬件资源），支持程序运行。</strong></p>
+<ul>
+<li>程序视角：对象 + API；</li>
+<li>硬件视角：C program。</li>
+</ul>
+<blockquote>
+<p>分布式系统中，对集群的抽象。</p>
+</blockquote>
+<h1 id="程序视角"><a href="#程序视角" class="headerlink" title="程序视角"></a>程序视角</h1><blockquote>
+<p>操作系统上的程序。</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="鸡兔同笼问题"><a href="#鸡兔同笼问题" class="headerlink" title="鸡兔同笼问题"></a>鸡兔同笼问题</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-type">bool</span> <span class="hljs-title">inst_fetch</span><span class="hljs-params">(<span class="hljs-type">inst_t</span> *in)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">union</span><br>    &#123;<br>        <span class="hljs-type">inst_t</span> i;<br>        u32 u;<br>    &#125; u;<br>    <span class="hljs-type">int</span> r = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%x&quot;</span>, &amp;u.u);<br>    *in = u.i;<br>    <span class="hljs-keyword">return</span> r &gt; <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-type">void</span> <span class="hljs-title">ebreak</span><span class="hljs-params">(CPUState *cpu)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">switch</span> (cpu-&gt;x[<span class="hljs-number">10</span>])<br>    &#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>    &#123;<br>        <span class="hljs-built_in">putchar</span>(cpu-&gt;x[<span class="hljs-number">11</span>]);<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, cpu-&gt;x[<span class="hljs-number">11</span>]);<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:<br>    &#123;<br>        cpu-&gt;on = <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">default</span>:<br>        <span class="hljs-built_in">assert</span>(<span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdint.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;assert.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span><br><span class="hljs-keyword">typedef</span> <span class="hljs-type">uint32_t</span> u32;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>    u32 op : <span class="hljs-number">7</span>, rd : <span class="hljs-number">5</span>, f3 : <span class="hljs-number">3</span>, rs1 : <span class="hljs-number">5</span>, rs2 : <span class="hljs-number">5</span>, f7 : <span class="hljs-number">7</span>;<br>&#125; <span class="hljs-type">inst_t</span>;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>    u32 on, x[<span class="hljs-number">32</span>];<br>&#125; CPUState;<br><br><span class="hljs-comment">// Uncore:</span><br><span class="hljs-comment">//   inst_fetch - read an instruction from stdin</span><br><span class="hljs-comment">//   ebreak - hyper call: putchar/putd/exit</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;uncore.c&quot;</span></span><br><br><span class="hljs-type">static</span> <span class="hljs-keyword">inline</span> u32 <span class="hljs-title function_">sext</span><span class="hljs-params">(u32 val, u32 n)</span><br>&#123;<br>    <span class="hljs-comment">// Sign extend n-bit integer val to 32-bit</span><br>    u32 mask = ~((<span class="hljs-number">1</span> &lt;&lt; n) - <span class="hljs-number">1</span>);<br>    u32 <span class="hljs-built_in">set</span> = (val &gt;&gt; n) &amp; <span class="hljs-number">1</span>;<br>    u32 ret = <span class="hljs-built_in">set</span> ? (val | mask) : val;<br>    <span class="hljs-keyword">return</span> ret;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span><br>&#123;<br>    CPUState cpu = &#123;.on = <span class="hljs-number">1</span>, .x = &#123;<span class="hljs-number">0</span>&#125;&#125;; <span class="hljs-comment">// The RESET state</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; argv[i + <span class="hljs-number">1</span>] &amp;&amp; i &lt; <span class="hljs-number">8</span>; i++)<br>    &#123;<br>        cpu.x[<span class="hljs-number">10</span> + i] = atoi(argv[i + <span class="hljs-number">1</span>]); <span class="hljs-comment">// Set a0-a7 to arguments</span><br>    &#125;<br><br>    <span class="hljs-type">inst_t</span> in;<br>    <span class="hljs-comment">// 逐一取出指令并执行</span><br>    <span class="hljs-keyword">while</span> (cpu.on &amp;&amp; inst_fetch(&amp;in))<br>    &#123;<br>        <span class="hljs-comment">// For each fetched instruction, execute it following the RV32I spec</span><br>        u32 op = in.op, f3 = in.f3, f7 = in.f7;<br>        u32 imm = sext((f7 &lt;&lt; <span class="hljs-number">5</span>) | in.rs2, <span class="hljs-number">12</span>), shamt = in.rs2;<br>        u32 rd = in.rd, rs1_u = cpu.x[in.rs1], rs2_u = cpu.x[in.rs2], res = <span class="hljs-number">0</span>;<br><br>        <span class="hljs-comment">// 只需要六条指令，就可以实现鸡兔同笼问题的解法</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __ <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-comment">// Bad syntactic sugar!</span></span><br>        <span class="hljs-keyword">if</span> (op == <span class="hljs-number">0b0110011</span> &amp;&amp; f3 == <span class="hljs-number">0b000</span> &amp;&amp; f7 == <span class="hljs-number">0b0000000</span>)<br>            res = rs1_u + rs2_u;<br>        __(op == <span class="hljs-number">0b0110011</span> &amp;&amp; f3 == <span class="hljs-number">0b000</span> &amp;&amp; f7 == <span class="hljs-number">0b0100000</span>)<br>        res = rs1_u - rs2_u;<br>        __(op == <span class="hljs-number">0b0010011</span> &amp;&amp; f3 == <span class="hljs-number">0b000</span>)<br>        res = rs1_u + imm;<br>        __(op == <span class="hljs-number">0b0010011</span> &amp;&amp; f3 == <span class="hljs-number">0b001</span> &amp;&amp; f7 == <span class="hljs-number">0b0000000</span>)<br>        res = rs1_u &lt;&lt; shamt;<br>        __(op == <span class="hljs-number">0b0010011</span> &amp;&amp; f3 == <span class="hljs-number">0b101</span> &amp;&amp; f7 == <span class="hljs-number">0b0000000</span>)<br>        res = rs1_u &gt;&gt; shamt;<br>        __(op == <span class="hljs-number">0b1110011</span> &amp;&amp; f3 == <span class="hljs-number">0b000</span> &amp;&amp; rd == <span class="hljs-number">0</span> &amp;&amp; imm == <span class="hljs-number">1</span>)<br>        ebreak(&amp;cpu);<br>        <span class="hljs-keyword">else</span> assert(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">if</span> (rd)<br>            cpu.x[rd] = res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>make run；生成机器指令。</p>
+</blockquote>
 
                 
               </div>
@@ -302,7 +326,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/Course/" class="category-chain-item">Course</a>
   
   
 
@@ -317,11 +341,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Java/">#Java</a>
-      
-        <a href="/tags/Design-Patterns/">#Design Patterns</a>
-      
-        <a href="/tags/OOP/">#OOP</a>
+        <a href="/tags/Operating-System/">#Operating System</a>
       
     </div>
   
@@ -333,8 +353,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>《Head First Design Patterns》读书笔记（一）欢迎来到设计模式</div>
-      <div>https://ancen.blog/2023/02/19/《Head-First-Design-Patterns》读书笔记（一）欢迎来到设计模式/</div>
+      <div>NJU OS 学习笔记（一）绪论</div>
+      <div>https://ancen.blog/2023/02/22/NJU-OS-学习笔记（一）绪论/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +366,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月19日</div>
+          <div>2023年2月22日</div>
         </div>
       
       
@@ -378,18 +398,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/20/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E5%B0%81%E8%A3%85%E5%8F%8D%E5%B0%84%E8%AF%AD%E6%B3%95/" title="《Android插件化》读书笔记（三）封装反射语法">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">《Android插件化》读书笔记（三）封装反射语法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/19/%E3%80%8AAndroid%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89UI/" title="《Android第一行代码》读书笔记（二）UI">
-                        <span class="hidden-mobile">《Android第一行代码》读书笔记（二）UI</span>
+                      <a href="/2023/02/21/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E8%B7%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1/" title="《Android插件化》读书笔记（五）跨进程通信">
+                        <span class="hidden-mobile">《Android插件化》读书笔记（五）跨进程通信</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

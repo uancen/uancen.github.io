@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ancen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Activity组件；用户界面；交互。  Android程序设计讲究逻辑和视图分离，一个活动对应一个布局。  用法创建一个活动布局；onCreate()；AndroidManifest.xml注册，配置主活动。  android:id&#x3D;”@+id&#x2F;“，经典XML。  123456@Overrideprotected void onCreate(Bundle savedInsta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Android第一行代码》读书笔记（一）Activity">
+<meta property="og:url" content="https://ancen.blog/2023/02/18/Android%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Activity/index.html">
+<meta property="og:site_name" content="Ancenの小屋">
+<meta property="og:description" content="Activity组件；用户界面；交互。  Android程序设计讲究逻辑和视图分离，一个活动对应一个布局。  用法创建一个活动布局；onCreate()；AndroidManifest.xml注册，配置主活动。  android:id&#x3D;”@+id&#x2F;“，经典XML。  123456@Overrideprotected void onCreate(Bundle savedInsta">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-18T12:32:29.000Z">
+<meta property="article:modified_time" content="2023-02-22T15:52:09.232Z">
+<meta property="article:author" content="Ancen">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Activity">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>《Android第一行代码》读书笔记（一）Activity - Ancenの小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"ancen.blog","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Ancen</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="《Android第一行代码》读书笔记（一）Activity"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-18 20:32" pubdate>
+          2023年2月18日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">《Android第一行代码》读书笔记（一）Activity</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h1><p>组件；用户界面；交互。</p>
+<blockquote>
+<p>Android程序设计讲究逻辑和视图分离，一个活动对应一个布局。</p>
+</blockquote>
+<h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><h2 id="创建一个活动"><a href="#创建一个活动" class="headerlink" title="创建一个活动"></a>创建一个活动</h2><p>布局；onCreate()；AndroidManifest.xml注册，配置主活动。</p>
+<blockquote>
+<p>android:id&#x3D;”@+id&#x2F;“，经典XML。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> &#123;<br>    <span class="hljs-built_in">super</span>.onCreate(savedInstanceState);<br>    <span class="hljs-comment">// setContentView传入一个布局文件的id，在活动中加载该布局</span><br>    setContentView(R.layout.first_layout);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">activity</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.FirstActivity&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">&quot;true&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:label</span>=<span class="hljs-string">&quot;This is FirstActivity&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>&lt;intent-filter&gt;</code>配置主活动。</p>
+</blockquote>
+<h2 id="Toast"><a href="#Toast" class="headerlink" title="Toast"></a>Toast</h2><p><code>Toast.makeTest().show()</code>，消息弹出；自动消失；短消息。</p>
+<h2 id="Menu"><a href="#Menu" class="headerlink" title="Menu"></a>Menu</h2><p>菜单；res，menu（Directory），main.xml；<code>&lt;item&gt;</code>标签来创建菜单项。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建菜单对象。</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">onCreateOptionsMenu</span><span class="hljs-params">(Menu menu)</span>&#123;<br>    <span class="hljs-comment">// MenuInflater对象inflate方法创建菜单</span><br>    getMenuInflater().inflate(R.menu.main,menu);<br>    <span class="hljs-comment">// 允许创建的菜单显示出来</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 菜单响应事件。</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">onOptionsItemSelected</span><span class="hljs-params">(MenuItem item)</span>&#123;<br>    <span class="hljs-keyword">switch</span>(item.getItemId())&#123;<br>        <span class="hljs-keyword">case</span> R.id.add_item:<br>            Toast.makeText(<span class="hljs-built_in">this</span>,<span class="hljs-string">&quot;Add&quot;</span>,Toast.LENGTH_SHORT).show();<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> R.id.remove_item:<br>            Toast.makeText(<span class="hljs-built_in">this</span>,<span class="hljs-string">&quot;Remove&quot;</span>,Toast.LENGTH_SHORT).show();<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">default</span>:<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="销毁一个活动"><a href="#销毁一个活动" class="headerlink" title="销毁一个活动"></a>销毁一个活动</h2><p><code>finish();</code></p>
+<h1 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h1><p>从主活动跳到其他活动。</p>
+<h2 id="显式Intent"><a href="#显式Intent" class="headerlink" title="显式Intent"></a>显式Intent</h2><p>Intent，组件之间交互。用于</p>
+<ul>
+<li>指明当前组件想要执行的活动；</li>
+<li>在不同组件之间传递数据。</li>
+</ul>
+<p>Intent用于启动活动、启动服务、发送广播等场景。Intent意图明显，称为显式Intent。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java">button1.setOnClickListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">View</span>.OnClickListener() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onClick</span><span class="hljs-params">(View view)</span> &#123;<br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">        * @param Context</span><br><span class="hljs-comment">        * @param Class</span><br><span class="hljs-comment">        * 指向希望打开的活动</span><br><span class="hljs-comment">        * */</span><br>        <span class="hljs-type">Intent</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>(FirstActivity.<span class="hljs-built_in">this</span>,SecondActivity.class);<br>        startActivityForResult(intent,<span class="hljs-number">1</span>);<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<h2 id="隐式Intent"><a href="#隐式Intent" class="headerlink" title="隐式Intent"></a>隐式Intent</h2><p>指定一系列更抽象的action和category信息，交由系统去分析这个Intent，帮助<strong>找出最合适的活动去启动</strong>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">activity</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.SecondActivity&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;com.ancen.activitytest.ACTION_START&quot;</span> /&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.category.DEFAULT&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><code>&lt;activity&gt;</code>下配置<code>&lt;intent-filter&gt;</code>，指定当前活动可以响应的action和category。当action和category同时匹配，这个活动才能响应Intent。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">button1.setOnClickListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">View</span>.OnClickListener() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onClick</span><span class="hljs-params">(View view)</span> &#123;<br>        <span class="hljs-type">Intent</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>(<span class="hljs-string">&quot;con.ancen.activitytest.ACTION_START&quot;</span>);<br>        startActivity(intent);<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p><code>android.intent.category.DEFAULT</code>是一种默认的category，调用startActivity会自动将其添加进Intent。</p>
+<blockquote>
+<p>每个Intent中只能有一个action，但却能指定多个category。addCategory来添加category。新增的category必须有对应的响应Activity。</p>
+</blockquote>
+<h2 id="启动其他程序的活动"><a href="#启动其他程序的活动" class="headerlink" title="启动其他程序的活动"></a>启动其他程序的活动</h2><blockquote>
+<p>隐式Intent更多的用法，点题，即使用Intent在程序之间“穿梭”。</p>
+</blockquote>
+<p>隐式Intent，启动其他程序的活动，使得Android多个应用程序之间的功能共享成为了可能。例如，应用程序需要展示网页，调用系统的浏览器打开网页。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">button1.setOnClickListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">View</span>.OnClickListener() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onClick</span><span class="hljs-params">(View view)</span> &#123;<br>        <span class="hljs-type">Intent</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>(Intent.ACTION_VIEW);<br>        <span class="hljs-comment">// Uri.parse()：将⼀个⽹址字符串解析成⼀个Uri对象</span><br>        intent.setData(Uri.parse(<span class="hljs-string">&quot;https://www.google.com&quot;</span>));<br>        startActivity(intent);<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p>Intent指定Intent.ACTION_VIEW，Android内置动作，值为android.intent.action.VIEW。</p>
+<p><strong>setData用于指定当前Intent操作的数据</strong>。</p>
+<blockquote>
+<p><code>&lt;intent-filter&gt;</code>也可以配置<code>&lt;data&gt;</code>标签，用于更精确地指定当前活动能够响应什么类型的数据。scheme；host；port；path；mimeType（可以处理的数据类型，使用通配符指定）。**<code>&lt;data&gt;</code>标签指定的内容，需要和Intent中携带的Data一致。**</p>
+</blockquote>
+<p>自己建立一个活动，使也可以响应打开网页的Intent，即修改其注册信息从，配置了当前活动能够响应的action是Intent.ACTION_VIEW 的常量值。这时候会弹出选择浏览器响应，或是该活动响应。</p>
+<blockquote>
+<p>但实际上这个活动并没有加载并显⽰⽹⻚的功能，真正开发时候不要这么做，容易误导用户。</p>
+</blockquote>
+<h2 id="向下一个活动传递数据"><a href="#向下一个活动传递数据" class="headerlink" title="向下一个活动传递数据"></a>向下一个活动传递数据</h2><p>启动的时候传递数据。思路，Intent中捎带。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs haskell">/*<br> * @param key<br> * ⽤于后⾯从<span class="hljs-type">Intent</span>中取值<br> * @param <span class="hljs-class"><span class="hljs-keyword">data</span></span><br> * 需要传递的数据<br> */<br><span class="hljs-title">intent</span>.putExtra(<span class="hljs-string">&quot;extra_data&quot;</span>, <span class="hljs-class"><span class="hljs-keyword">data</span>);</span><br></code></pre></td></tr></table></figure>
+
+<p>启动了另⼀个活动，把这些数据从Intent中取出。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">Intent intent <span class="hljs-operator">=</span> getIntent()<span class="hljs-comment">;</span><br>String data <span class="hljs-operator">=</span> intent.getStringExtra(<span class="hljs-string">&quot;extra_data&quot;</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<p>getIntent()获取到用于启动活动的Intent，调用getStringExtra()方法，传入相应的键值，得到数据。</p>
+<h2 id="返回数据给上⼀个活动"><a href="#返回数据给上⼀个活动" class="headerlink" title="返回数据给上⼀个活动"></a>返回数据给上⼀个活动</h2><h3 id="startActivityForResult"><a href="#startActivityForResult" class="headerlink" title="startActivityForResult()"></a>startActivityForResult()</h3><p>startActivityForResult()方法也用于启动活动，这个方法期望在活动销毁的时候能够返回一个结果给上一个活动。具体做法，SecondActivity指定没有“意图”的Intent携带数据，setResult()传递Intent，finish()；在FirstActivity中重写onActivityResult()方法来得到返回的数据。</p>
+<blockquote>
+<p>onBackPressed()编写按下Back键逻辑，在这⾥添加返回数据的逻辑，使得按下Back键回到FirstActivity生效。</p>
+</blockquote>
+<blockquote>
+<p>以上onActivityResult回调方法嵌套多、耦合大、维护难， 被舍弃。</p>
+</blockquote>
+<h3 id="Activity-Results-API"><a href="#Activity-Results-API" class="headerlink" title="Activity Results API"></a>Activity Results API</h3><p>两个重要的组件：ActivityResultContract和ActivityResultLauncher。ActivityResultContract协议，定义了如何传递数据和如何处理返回的数据，抽象类；ActivityResultLauncher，启动器，launch方法来启动页面跳转。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Lambda表达式，当有结果返回时会回调到这里，在这里获取并处理数据</span><br><span class="hljs-type">ActivityResultLauncher</span> <span class="hljs-variable">launcher</span> <span class="hljs-operator">=</span> registerForActivityResult(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ActivityResultContracts</span>.StartActivityForResult(), <span class="hljs-keyword">new</span> <span class="hljs-title class_">ActivityResultCallback</span>&lt;ActivityResult&gt;() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onActivityResult</span><span class="hljs-params">(ActivityResult result)</span> &#123;<br>        <span class="hljs-keyword">if</span> (result.getResultCode() == RESULT_OK) &#123;<br>            Log.d(TAG, <span class="hljs-string">&quot;onActivityResult: data = &quot;</span> + result.getData().getStringExtra(<span class="hljs-string">&quot;data_return&quot;</span>));<br>        &#125;<br>    &#125;<br>&#125;);<br><br><span class="hljs-comment">// 为按钮注册监听器</span><br>button1.setOnClickListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">View</span>.OnClickListener() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onClick</span><span class="hljs-params">(View view)</span> &#123;<br>        <span class="hljs-type">Intent</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>(FirstActivity.<span class="hljs-built_in">this</span>,SecondActivity.class);<br>        <span class="hljs-comment">// startActivityForResult(intent,1);</span><br>        launcher.launch(intent);<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java">button2.setOnClickListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">View</span>.OnClickListener()&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onClick</span><span class="hljs-params">(View view)</span> &#123;<br>        Log.d(TAG, <span class="hljs-string">&quot;onClick: &quot;</span>);<br>        <span class="hljs-type">Intent</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>();<br>        intent.putExtra(<span class="hljs-string">&quot;data_return&quot;</span>, <span class="hljs-string">&quot;返回的数据&quot;</span>);<br>        setResult(RESULT_OK, intent);<br>        finish();<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<h1 id="活动的生命周期"><a href="#活动的生命周期" class="headerlink" title="活动的生命周期"></a>活动的生命周期</h1>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Note/" class="category-chain-item">Note</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Android/">#Android</a>
+      
+        <a href="/tags/Activity/">#Activity</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>《Android第一行代码》读书笔记（一）Activity</div>
+      <div>https://ancen.blog/2023/02/18/Android第一行代码 读书笔记（一）Activity/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Ancen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/19/%E3%80%8AAndroid%E7%AC%AC%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89UI/" title="《Android第一行代码》读书笔记（二）UI">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《Android第一行代码》读书笔记（二）UI</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/18/%E3%80%8AAndroid%E6%8F%92%E4%BB%B6%E5%8C%96%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89Java%E5%8E%9F%E7%94%9F%E5%8F%8D%E5%B0%84/" title="《Android插件化》读书笔记（二）Java原生反射">
+                        <span class="hidden-mobile">《Android插件化》读书笔记（二）Java原生反射</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
