@@ -16,19 +16,23 @@
   <meta name="author" content="Ancen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="操作符重载成成员函数在C++里面，操作符是一种函数，这是C++的一大特点。   操作符重载的原因：因为函数库中没有两个复数直接相加的函数，只有实数和实数相加的函数。  对于成员函数+&#x3D;：c2调用了+&#x3D;（+&#x3D;作用在c2身上），c2需要写出函数来进行正确调用；c2就是this，或者说this此时就指向了c2（this是一个指针），c2的地址传入了this。  任何函数都隐藏this参数。 _doapl">
+    <meta name="description" content="操作符重载 可以重载为成员函数或者是非成员函数。  成员函数在C++里面，操作符是一种函数，这是C++的一大特点。   操作符重载的原因：因为函数库中没有两个复数直接相加的函数，只有实数和实数相加的函数。  对于成员函数+&#x3D;：c2调用了+&#x3D;（+&#x3D;作用在c2身上），c2需要写出函数来进行正确调用；c2就是this，或者说this此时就指向了c2（this是一个指针），c2的地址传入了this。  任">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp面向对象高级编程（上） 学习笔记（四）操作符重载">
 <meta property="og:url" content="https://ancen.blog/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/index.html">
 <meta property="og:site_name" content="Ancenの小屋">
-<meta property="og:description" content="操作符重载成成员函数在C++里面，操作符是一种函数，这是C++的一大特点。   操作符重载的原因：因为函数库中没有两个复数直接相加的函数，只有实数和实数相加的函数。  对于成员函数+&#x3D;：c2调用了+&#x3D;（+&#x3D;作用在c2身上），c2需要写出函数来进行正确调用；c2就是this，或者说this此时就指向了c2（this是一个指针），c2的地址传入了this。  任何函数都隐藏this参数。 _doapl">
+<meta property="og:description" content="操作符重载 可以重载为成员函数或者是非成员函数。  成员函数在C++里面，操作符是一种函数，这是C++的一大特点。   操作符重载的原因：因为函数库中没有两个复数直接相加的函数，只有实数和实数相加的函数。  对于成员函数+&#x3D;：c2调用了+&#x3D;（+&#x3D;作用在c2身上），c2需要写出函数来进行正确调用；c2就是this，或者说this此时就指向了c2（this是一个指针），c2的地址传入了this。  任">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ancen.blog/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/operator1.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/outclassbody.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/operator2.png">
 <meta property="og:image" content="https://ancen.blog/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/return.png">
 <meta property="og:image" content="https://ancen.blog/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/returnwhat.png">
-<meta property="og:image" content="https://ancen.blog/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/outclassbody.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/temp.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/operator3.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/output.png">
 <meta property="article:published_time" content="2021-04-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-24T04:48:21.940Z">
+<meta property="article:modified_time" content="2023-02-24T12:27:42.570Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="cpp">
 <meta property="article:tag" content="OOP">
@@ -230,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          606 字
+          1.7k 字
         
       </span>
     
@@ -241,7 +245,7 @@
         
         
         
-          6 分钟
+          14 分钟
         
       </span>
     
@@ -284,7 +288,10 @@
             
               <div class="markdown-body">
                 
-                <h1 id="操作符重载成成员函数"><a href="#操作符重载成成员函数" class="headerlink" title="操作符重载成成员函数"></a>操作符重载成成员函数</h1><p>在C++里面，操作符是一种函数，这是C++的一大特点。</p>
+                <h1 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h1><blockquote>
+<p>可以重载为成员函数或者是非成员函数。</p>
+</blockquote>
+<h2 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h2><p>在C++里面，操作符是一种函数，这是C++的一大特点。</p>
 <p><img src="/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/operator1.png" srcset="/img/loading.gif" lazyload alt></p>
 <blockquote>
 <p>操作符重载的原因：因为函数库中没有两个复数直接相加的函数，只有实数和实数相加的函数。</p>
@@ -294,7 +301,18 @@
 <p>任何函数都隐藏this参数。</p>
 <p>_doapl：再次调用 _dopal；也许是其他地方也要使用，所以写成单独的方法。</p>
 </blockquote>
-<h2 id="尽量return-by-reference"><a href="#尽量return-by-reference" class="headerlink" title="尽量return by reference"></a>尽量return by reference</h2><p>如果return by reference，传递者无需知道接收端是以by reference还是by value的形式接受object。</p>
+<h2 id="非成员函数"><a href="#非成员函数" class="headerlink" title="非成员函数"></a>非成员函数</h2><blockquote>
+<p>无隐含参数this（指针）。</p>
+<p><strong>类外区域</strong>，主要有成员函数、全局函数。</p>
+<p><img src="/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/outclassbody.png" srcset="/img/loading.gif" lazyload alt></p>
+<blockquote>
+<p>两个全局函数（没有class的名称），目的是取得复数的实部、虚部。</p>
+</blockquote>
+</blockquote>
+<p>为了应付用户的3种可能用法，需要在类区域（class body）外写3个对应的处理加法的函数；以下123仅用作标识。</p>
+<p><img src="/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/operator2.png" srcset="/img/loading.gif" lazyload alt></p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><h2 id="尽量return-by-reference"><a href="#尽量return-by-reference" class="headerlink" title="尽量return by reference"></a>尽量return by reference</h2><p>写一个函数一般考量两个点，这两点影响着程序执行的效率：参数传递要不要by reference；返回值传递要不要by reference。</p>
+<p>如果return by reference，传递者无需知道接收端是以by reference还是by value的形式接受object。</p>
 <p><img src="/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/return.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>返回<code>*ths</code>（也就是一个object、返回值），接收用complex&amp;接收；但是其实<code>*ths</code>处不需要管接收用什么接收。</p>
 <blockquote>
@@ -303,12 +321,31 @@
 <h2 id="返回值是写void还是写一个具体类型"><a href="#返回值是写void还是写一个具体类型" class="headerlink" title="返回值是写void还是写一个具体类型"></a>返回值是写void还是写一个具体类型</h2><p><img src="/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/returnwhat.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>返回值是写void还是写一个具体类型；如果使用者只是这样调用+=这个重载函数：c2+=c1，那么返回类型complex&amp;写成void是没有问题的。</p>
 <p>但如果这样调用：c3+=c2+=c1，返回void类型的话，就有问题了；希望c1先加到c2上，再将上述操作的返回值加到c3上。</p>
-<h2 id="类区域外定义函数"><a href="#类区域外定义函数" class="headerlink" title="类区域外定义函数"></a>类区域外定义函数</h2><p>类外区域，主要有成员函数、全局函数。</p>
-<p><img src="/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/outclassbody.png" srcset="/img/loading.gif" lazyload alt></p>
-<blockquote>
-<p>两个全局函数（没有class的名称），目的是取得复数的实部、虚部。</p>
+<h1 id="临时对象"><a href="#临时对象" class="headerlink" title="临时对象"></a>临时对象</h1><blockquote>
+<p>temp object。</p>
 </blockquote>
-<p>操作符重载</p>
+<p><img src="/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/temp.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>这些函数绝对不可以return by reference，因为，它们返回的必定是个local object，出去就不存在了，所以一定要return by value。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">// （类名后面+小括号）</span><br><span class="hljs-built_in">typename</span>();<br></code></pre></td></tr></table></figure>
+<p>这是一个特殊语法，是创建临时对象的特殊语法。举例，函数体中的complex()就是在创建临时对象，临时对象的生命周期就是这创建的那一行，到下一行生命就结束了。</p>
+<p><img src="/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/operator3.png" srcset="/img/loading.gif" lazyload alt></p>
+<blockquote>
+<p>第一个正号操作，返回的是原来的东西，没有产生新的东西（新的local object，而下面代码中取反的操作产生了新的东西），那完全可以retrun by reference啊，这个是标准库里面的东西，那么厉害的人会注意不到这一点吗？有可能。这里其实可以retrun by reference。complex后面可以加个&amp;。（错误观点！）</p>
+</blockquote>
+<p>因为传入的参数是const类型的引用，如果将返回值改成引用，相当于将const类型转换为非const类型，这在编译上是通不过的。</p>
+<h1 id="输出操作符重载"><a href="#输出操作符重载" class="headerlink" title="输出操作符重载"></a>输出操作符重载</h1><blockquote>
+<p>单独拿出来，举例。</p>
+</blockquote>
+<p><img src="/2021/04/04/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/output.png" srcset="/img/loading.gif" lazyload alt></p>
+<blockquote>
+<p>运算符永远是作用在左边的对象上，没有作用在右边上的。</p>
+</blockquote>
+<h2 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h2><p>参数传递，均是pass by reference；x没有改变，const，但是os传进来需要改变，每一次输出都在改变状态，不可以const；“&lt;&lt;”是双目运算符，需要提供2个参数。</p>
+<h2 id="返回值传递"><a href="#返回值传递" class="headerlink" title="返回值传递"></a>返回值传递</h2><p>返回值传递，return by reference；如果不是连续输出，函数的返回值类型可以设计成void，如果使用连续输出，函数的返回值类型不能是void类型；返回类型前不可以加”const”，因为连续输出的时候被丢到屏幕上的东西一直在变，即每有一个新的输出变量“os”的状态就会发生变化（也是由于这个原因，ostream&amp; os的前面不可以加const修饰符），相当于一个变量的值一直在发生变化。</p>
+<h2 id="成员函数-1"><a href="#成员函数-1" class="headerlink" title="成员函数"></a>成员函数</h2><p>&lt;&lt;不可以写成成员函数，操作符重载一定左边上，正常使用习惯是&lt;&lt;作用到左边的cout身上；如果写成成员函数，<code>c1 &lt;&lt; cout;</code>，不符合使用习惯。</p>
+<blockquote>
+<p>任何一个操作都可以设置为成员函数或者全局函数；看情况。</p>
+</blockquote>
 
                 
               </div>
