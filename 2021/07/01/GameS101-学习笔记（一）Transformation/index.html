@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="Ancenの小屋">
 <meta property="og:description" content="变换基础二维变换二维变换；线性变换&#x3D;&#x3D;矩阵运算，缩放、反射、切变、旋转。$$\begin{aligned}x^{\prime} &amp; &#x3D;a x+b y \y^{\prime} &amp; &#x3D;c x+d y \\end{aligned}$$ $$\begin{aligned}{\left[\begin{array}{l}x^{\prime} \y^{\p">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ancen.blog/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/inversetransform.png">
-<meta property="og:image" content="https://ancen.blog/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/rotationaroundaxis.png">
-<meta property="og:image" content="https://ancen.blog/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/flighteular.png">
-<meta property="og:image" content="https://ancen.blog/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/Rrotation.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/inversetransform.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/rotationaroundaxis.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/flighteular.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/Rrotation.png">
 <meta property="article:published_time" content="2021-07-01T00:00:00.000Z">
 <meta property="article:modified_time" content="2023-02-23T08:44:45.401Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="Graphics">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ancen.blog/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/inversetransform.png">
+<meta name="twitter:image" content="https://ancen.blog/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/inversetransform.png">
   
   
   
@@ -314,7 +314,7 @@
 <h2 id="逆变换"><a href="#逆变换" class="headerlink" title="逆变换"></a>逆变换</h2><blockquote>
 <p>Inverse transform。</p>
 </blockquote>
-<p><img src="/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/inversetransform.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/inversetransform.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="组合变换"><a href="#组合变换" class="headerlink" title="组合变换"></a>组合变换</h2><p>复杂的变换都是由简单的组合而来；变换的顺序很重要；<strong>矩阵乘法无交换律</strong>。</p>
 <blockquote>
 <p>e.g. 一个不在原点的做旋转</p>
@@ -325,7 +325,7 @@
 <h3 id="Scale-1"><a href="#Scale-1" class="headerlink" title="Scale"></a>Scale</h3><p>$$<br>&amp; \mathbf{S}\left(s_x, s_y, s_z\right)&#x3D;\left(\begin{array}{cccc}<br>s_x &amp; 0 &amp; 0 &amp; 0 \<br>0 &amp; s_y &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; s_z &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right) \<br>$$</p>
 <h3 id="Translation-1"><a href="#Translation-1" class="headerlink" title="Translation"></a>Translation</h3><p>$$<br>&amp; \mathbf{T}\left(t_x, t_y, t_z\right)&#x3D;\left(\begin{array}{cccc}<br>1 &amp; 0 &amp; 0 &amp; t_x \<br>0 &amp; 1 &amp; 0 &amp; t_y \<br>0 &amp; 0 &amp; 1 &amp; t_z \<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right)<br>$$</p>
 <h3 id="Rotation-1"><a href="#Rotation-1" class="headerlink" title="Rotation"></a>Rotation</h3><h4 id="around-axis"><a href="#around-axis" class="headerlink" title="around axis"></a>around axis</h4><p>$$<br>\begin{aligned}<br>&amp; \mathbf{R}_x(\alpha)&#x3D;\left(\begin{array}{cccc}<br>1 &amp; 0 &amp; 0 &amp; 0 \<br>0 &amp; \cos \alpha &amp; -\sin \alpha &amp; 0 \<br>0 &amp; \sin \alpha &amp; \cos \alpha &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right) \<br>&amp; \mathbf{R}_y(\alpha)&#x3D;\left(\begin{array}{cccc}<br>\cos \alpha &amp; 0 &amp; \sin \alpha &amp; 0 \<br>0 &amp; 1 &amp; 0 &amp; 0 \<br>-\sin \alpha &amp; 0 &amp; \cos \alpha &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right) \<br>&amp; \mathbf{R}_z(\alpha)&#x3D;\left(\begin{array}{cccc}<br>\cos \alpha &amp; -\sin \alpha &amp; 0 &amp; 0 \<br>\sin \alpha &amp; \cos \alpha &amp; 0 &amp; 0 \<br>0 &amp; 0 &amp; 1 &amp; 0 \<br>0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right)<br>\end{aligned}<br>$$</p>
-<p><img src="/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/rotationaroundaxis.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/rotationaroundaxis.png" srcset="/img/loading.gif" lazyload></p>
 <h4 id="Eular-Angle"><a href="#Eular-Angle" class="headerlink" title="Eular Angle"></a>Eular Angle</h4><p>$\mathbf{R}_{x y z}(\alpha, \beta, \gamma)&#x3D;\mathbf{R}_x(\alpha) \mathbf{R}_y(\beta) \mathbf{R}_z(\gamma)$</p>
 <p>A rotation by q about an arbitrary axis can be decomposed into the concatenation of rotations about the x, y, and z axes。</p>
 <blockquote>
@@ -342,12 +342,12 @@
 <blockquote>
 <p>As regard to a camera, only concern about it’s pitch and yaw.</p>
 </blockquote>
-<p><img src="/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/flighteular.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/flighteular.png" srcset="/img/loading.gif" lazyload></p>
 <h4 id="Rodrigues-Rotation"><a href="#Rodrigues-Rotation" class="headerlink" title="Rodrigues Rotation"></a>Rodrigues Rotation</h4><p>Rotation by angle $\alpha$ around axis $n$<br>$$<br>\mathbf{R}(\mathbf{n}, \alpha)&#x3D;\cos (\alpha) \mathbf{I}+(1-\cos (\alpha)) \mathbf{n n}^T+\sin (\alpha) \underbrace{\left(\begin{array}{ccc}<br>0 &amp; -n_z &amp; n_y \<br>n_z &amp; 0 &amp; -n_x \<br>-n_y &amp; n_x &amp; 0<br>\end{array}\right)}_{\mathbf{N}}<br>$$</p>
 <blockquote>
 <p>n是旋转轴，alpha是旋转角度；默认n过原点，不是，则移到原点，再移回去。</p>
 </blockquote>
-<p><img src="/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/Rrotation.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/Rrotation.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <ol>
 <li>Move fixed point to origin;</li>
