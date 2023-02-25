@@ -4,25 +4,26 @@
   
   
   <entry>
-    <title>Cpp Map</title>
-    <link href="/2023/02/25/Cpp-Map/"/>
-    <url>/2023/02/25/Cpp-Map/</url>
+    <title>Cpp Primer 读书笔记 第七章类</title>
+    <link href="/2023/02/25/Cpp-Primer-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%B1%BB/"/>
+    <url>/2023/02/25/Cpp-Primer-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%B1%BB/</url>
     
-    <content type="html"><![CDATA[<p>C++</p><ul><li><a href="/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/" title="Cpp面向对象高级编程（下） 学习笔记（一）转换函数">Cpp面向对象高级编程（下）-学习笔记（一）转换函数</a></li></ul>]]></content>
-    
-    
-    <categories>
-      
-      <category>Map</category>
-      
-    </categories>
+    <content type="html"><![CDATA[<h1 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h1><div class="table-container"><table><thead><tr><th>Q</th><th>A</th></tr></thead><tbody><tr><td>1. 类的基本思想是什么？</td><td>数据抽象、封装。</td></tr><tr><td>2. class和struct的区别？</td><td>默认访问权限不同。</td></tr><tr><td>3. 什么时候用struct？</td><td>数据成员都为public时。</td></tr><tr><td>4. 委托构造函数是什么？</td><td>借助另一个已有的构造函数定义新构造函数的一种方式</td></tr><tr><td>5. 什么是友元？如何声明？</td><td>允许其访问类的私有成员的”东西“为类的友元。在类内声明，可以在类内任何位置声明，但是最好在开始或结束位置。声明方式为用friend来修饰一个正常的声明。</td></tr><tr><td>6. 声明友元函数、友元类要注意什么？</td><td>友元声明并不是通常意义上的访问声明。必须要在类外且是类的前面声明该函数或类。尽管友元函数的原型有在类的定义中出现过，但是友元函数并不是成员函数。</td></tr><tr><td>7. 声明重载函数为友元需要注意什么？</td><td>每个版本的重载都要声明一遍。</td></tr><tr><td>8. 类的什么成员必须初始化？</td><td>引用和const成员。</td></tr><tr><td>9. 类的静态成员如何声明和定义？</td><td>在类内用static声明，在类外定义和初始化，类外不加static。</td></tr><tr><td>10. const成员函数的使用需要注意什么？</td><td>const只能使用const（隐式的this指针被设置为指向常量的指针）。</td></tr></tbody></table></div><h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><p>类的基本思想：数据抽象、封装；数据抽象，依赖于接口和实现；封装，将接口和实现分离；用户只可以使用接口，无法访问实现。</p><h1 id="定义抽象数据类型"><a href="#定义抽象数据类型" class="headerlink" title="定义抽象数据类型"></a>定义抽象数据类型</h1><h2 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h2><p>成员函数和非成员函数的本质：</p><p><strong>成员函数：类的实现的一部分；非成员函数：接口的组成部分</strong>。</p><p>成员函数：声明必须在类的内部，定义可以在内部也可以在类的外部；非成员函数：声明和定义都在类的外部。</p><p>在类的外部定义成员函数，定义要和声明匹配，类外部定义的成员的名字必须包含它所属的类名。</p><blockquote><p>该函数名，使编译器理解剩余代码位于类的作用域内。</p></blockquote><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">Sales_data::avg_price</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (units_sol)<br>        <span class="hljs-keyword">return</span> revenue / units_sols;<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p>成员函数通过名为this的额外的隐式参数来访问调用它的那个对象；任何对类成员的直接访问都被看作this的隐式引用。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// 编译器把total的地址传给isbn的隐式形参this</span><br>total.<span class="hljs-built_in">isbn</span>()<br></code></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 两者等价</span><br>std::string <span class="hljs-title function_">isbn</span><span class="hljs-params">()</span> const &#123;<span class="hljs-keyword">return</span> bookNo;&#125;<br>std::string <span class="hljs-title function_">isbn</span><span class="hljs-params">()</span> const &#123;<span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>-&gt;bookNo;&#125;<br></code></pre></td></tr></table></figure><h2 id="const成员函数"><a href="#const成员函数" class="headerlink" title="const成员函数"></a>const成员函数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">std::string <span class="hljs-title">isbn</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>&#123;<span class="hljs-keyword">return</span> bookNo;&#125;<br></code></pre></td></tr></table></figure><p>紧随参数列表之后的const关键字，作用是修改隐式this指针的类型；默认情况下，this的类型是指向类类型非常量版本的常量指针；即默认情况下不可以把this绑定到一个常量对象上。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// this的类型是</span><br>Sales_data *<span class="hljs-type">const</span><br></code></pre></td></tr></table></figure><p>所以不可以在一个常量对象上调用普通的成员函数。如果isbn是普通函数，且this是普通的指针参数</p>]]></content>
     
     
-    <tags>
-      
-      <tag>cpp</tag>
-      
-    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>CppSTL 学习笔记（一）STL各组件应用示例</title>
+    <link href="/2023/02/25/CppSTL-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89STL%E5%90%84%E7%BB%84%E4%BB%B6%E5%BA%94%E7%94%A8%E7%A4%BA%E4%BE%8B/"/>
+    <url>/2023/02/25/CppSTL-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89STL%E5%90%84%E7%BB%84%E4%BB%B6%E5%BA%94%E7%94%A8%E7%A4%BA%E4%BE%8B/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
     
   </entry>
   
@@ -354,6 +355,33 @@
   
   
   <entry>
+    <title>Cpp面向对象高级编程（上） 学习笔记（六）内存管理</title>
+    <link href="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+    <url>/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="栈和堆"><a href="#栈和堆" class="headerlink" title="栈和堆"></a>栈和堆</h1><h2 id="对象相关"><a href="#对象相关" class="headerlink" title="对象相关"></a>对象相关</h2><blockquote><p>局部对象，定义在作用域内的对象，不再单独说明。</p></blockquote><h3 id="静态对象"><a href="#静态对象" class="headerlink" title="静态对象"></a>静态对象</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">&#123;<br><span class="hljs-function"><span class="hljs-type">static</span> Complex <span class="hljs-title">c2</span><span class="hljs-params">(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>一个对象前面加上static修饰符后，即变成所谓的静态对象（static object），其生命在作用域（scope）结束之后仍然存在，直到整个程序的结束。</p><h3 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Complex</span>&#123;...&#125;;<br>...<br><span class="hljs-function">Complex <span class="hljs-title">c3</span><span class="hljs-params">(<span class="hljs-number">3</span>,<span class="hljs-number">4</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure><p>定义在任何作用域或者说大括号之外的对象。</p><blockquote><p><strong>一个对象的存在和消失取决于构造函数和析构函数何时被调用。</strong></p></blockquote><p>c3就是所谓的global object，其生命在整个程序结束之后才结束，也可以把它视为一种static object，其作用域是整个程序。</p><h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>对于全局对象，程序一开始，其构造函数就先被执行（比程序进入点更早）；程序即将结束前其析构函数被执行。</p><p>对于静态对象，当对象诞生时其构造函数被执行；当程序将结束时其析构函数才被执行，但比全局对象的析构函数早一步执行。</p><p>对于局部对象，当对象诞生时，其构造函数被执行；当离开作用域时，其析构函数被执行；对于new出来的局部对象，当对象诞生时其构造函数被执行，析构函数则在对象被delete时执行。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Complex</span>&#123;...&#125;;<br>...<br>&#123;<br><span class="hljs-comment">// Complex(3)是该函数体内的临时对象，其所占用的空间从heap中new得到</span><br><span class="hljs-comment">// 也就是动态分配得到，p指向这块空间</span><br>Complex* p = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Complex</span>(<span class="hljs-number">3</span>);<br>&#125;<br></code></pre></td></tr></table></figure><blockquote><p>静态全局对象和一般的全局对象的区别就是一般的全局对象在程序的其他文件中可以通过关键字extern来调用，而static声明的全局变量则只能在本文件中使用。</p></blockquote><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p><strong>stack，是存在于某作用域（scope）的一块内存空间（memory space）</strong>，例如调用函数，函数本身即会形成一个stack用来放置它所接收的参数，以及返回地址。</p><p>在函数本体（function body）内声明的任何变量，其所使用的内存块都取自上述stack。</p><h2 id="栈对象的生命周期"><a href="#栈对象的生命周期" class="headerlink" title="栈对象的生命周期"></a>栈对象的生命周期</h2><p>栈对象（stack object），其声明在作用域（scope）结束之际结束。这种作用域内的对象（object），又叫做local object，因为它会被自动清理（意思是析构函数被自动调用）。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Complex</span>&#123;...&#125;;<br>...<br>&#123;<br><span class="hljs-comment">// c1所占用的空间来自于stack</span><br><span class="hljs-function">Complex <span class="hljs-title">c1</span><span class="hljs-params">(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>举例，当离开作用域{}的时候，c1的生命自然就消失了， 即从栈中获得的内存，离开作用域的时候会自动释放（析构函数被自动调用）。</p><h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>Heap，所谓system heap，是指由操作系统提供的一块global内存空间，程序可动态分配（dynamic allocated）从其中获得若干区块（blocks）。new去取，去动态获得，但是同时也要兼任起动态释放的责任。</p><h2 id="堆对象的生命周期"><a href="#堆对象的生命周期" class="headerlink" title="堆对象的生命周期"></a>堆对象的生命周期</h2><p>当离开作用域{}的时候，动态分配的内存不会消失，即从堆中动态取得的内存不会自动消失，需要手动释放（delete）。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// A</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Complex</span>&#123;...&#125;;<br>...<br>&#123;<br>Complex *p = <span class="hljs-keyword">new</span> Complex;<br>...<br><span class="hljs-keyword">delete</span> p;<br>&#125;<br><span class="hljs-comment">// B</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Complex</span>&#123;...&#125;;<br>...<br>&#123;<br>Complex *p = <span class="hljs-keyword">new</span> Complex;<br>...<br>&#125;<br></code></pre></td></tr></table></figure><p>A：p所指向的便是heap object，因为是动态从操作系统某个地方分配的内存，其生命周期在它被delete之际（此时默认析构函数或者手写析构函数被调用）结束。</p><p>B：会出现内存泄露（memory leak），因为当作用域结束后，<strong>p所指向的heap object仍然存在，但是指针p的生命却结束了</strong>，作用域之外再也看不到p，也就没机会delete p。</p><h1 id="new和delete"><a href="#new和delete" class="headerlink" title="new和delete"></a>new和delete</h1><h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><p>先分配memory，再调用ctor。</p><p><img src="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/new.png" alt></p><p>编译器new分解为三个步骤，分配内存→指针转型→调用构造函数。</p><p>调用构造函数中，指针来调用成员函数，pc实际上是传入的隐藏参数this，是分配的内存的起始位置，构造函数中进行赋值操作。</p><h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><p>先调用dtor，再释放memory。</p><p><img src="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/delete.png" alt></p><p>class without point members，析构函数不做事情，马上就要delete，清理是做无用功。</p><p><img src="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/delete2.png" alt></p><p>class with point members，先调用析构函数，析构函数把字符串里动态分配的内容叉掉，其次释放内存，把字符串（是个指针）本身叉掉delete。</p><h2 id="memory-block"><a href="#memory-block" class="headerlink" title="memory block"></a>memory block</h2><p>即动态分配所得的内存块。</p><p><img src="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/block.png" alt></p><p>图中为内存结构，在VC中，分配的内存空间大小都是16的倍数，第一个图中是调试模式下，每个格表示4Bytes，Complex对象占8个字节，调试模式占32+4，cookie占4×2，计算得到的结果是52Bytes，不是16的倍数，所以补充12个Bytes的填补字节（pad部分），凑到64。</p><p>所以看似得到只是两个double的大小，但是用了64。</p><blockquote><p>cookie，记录整块给出的大小，系统回收时了解回收多大。</p></blockquote><p>最后一个byte标注是否给出（本来是40→加上标注变为41）：开头和结尾的<code>00000041</code>，其中的 <code>4</code>是64的16进制，<code>1</code>表示这块空间已经给出去了，<code>0</code>表示这块空间空闲。</p><p>如果没有debug（调试模式），就只有对象大小+cookie大小了：8+（4×2）=16。</p><h2 id="array"><a href="#array" class="headerlink" title="array"></a>array</h2><p>当动态分配的是数组。</p><p><img src="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/array.png" alt></p><p>最后又加了4：因为是数组，要记录这是数组。</p><p><img src="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/arraynew.png" alt></p><blockquote><p>21h代表一个16进制的数（32+1：已经使用）；3代表新创建了3个字符串。</p></blockquote><p>array new一定要搭配array delete，在使用指针新建字符数组的情况下，在手动释放内存的时候，如果<code>delete[] p;</code>写成了<code>delete p;</code>会造成内存泄露；因为3次析构函数各自负责把各自分配的动态内存叉掉，没有[]，则只会调用一次析构函数。</p><p>值得注意的是，错误用法<code>delete p;</code>导致出现的内存泄漏是String类中的指针指向的空间，而非指针本身。</p><p>如果是Complex 数组对象，因为其中没有指针，所以就算是使用<code>delete p;</code>也是没有问题的。但是为了万无一失，如果使用了array new 一定要搭配 array delete。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>cpp</tag>
+      
+      <tag>OOP</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Cpp面向对象高级编程（上） 学习笔记（五）三大函数</title>
     <link href="/2021/04/05/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E4%B8%89%E5%A4%A7%E5%87%BD%E6%95%B0/"/>
     <url>/2021/04/05/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E4%B8%89%E5%A4%A7%E5%87%BD%E6%95%B0/</url>
@@ -481,6 +509,31 @@
       <tag>cpp</tag>
       
       <tag>OOP</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Map</title>
+    <link href="/2019/07/01/Map/"/>
+    <url>/2019/07/01/Map/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><h2 id="C-primer"><a href="#C-primer" class="headerlink" title="C++ primer"></a>C++ primer</h2><blockquote><p>简单笔记，记重点，QA用来快速复习。</p></blockquote><ul><li><h2 id="HJ"><a href="#HJ" class="headerlink" title="HJ"></a>HJ</h2></li></ul><h3 id="Cpp面向对象高级编程（上）"><a href="#Cpp面向对象高级编程（上）" class="headerlink" title="Cpp面向对象高级编程（上）"></a>Cpp面向对象高级编程（上）</h3><h3 id="Cpp面向对象高级编程（下）"><a href="#Cpp面向对象高级编程（下）" class="headerlink" title="Cpp面向对象高级编程（下）"></a>Cpp面向对象高级编程（下）</h3><ul><li><a href="/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/" title="Cpp面向对象高级编程（下） 学习笔记（一）转换函数">Cpp面向对象高级编程（下）-学习笔记（一）转换函数</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Map</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>cpp</tag>
       
     </tags>
     
