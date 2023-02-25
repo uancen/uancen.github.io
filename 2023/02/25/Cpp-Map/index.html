@@ -16,29 +16,22 @@
   <meta name="author" content="Ancen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="转换函数转换函数是类成员函数，用来将对象类型转换为其他类型。 语法1234567&#x2F;* * type 要转换成的类型 * const 转换函数只是转换对象类型，并不会（也不应该）改变对象内的任何成员，设为const * &amp;#123;&amp;#125; 没有参数，转换不需要参数 * @return 没有返回类型，返回类型就是转换成的类型*&#x2F;operator type() const &amp;#123;&amp;#125;">
+    <meta name="description" content="C++  Cpp面向对象高级编程（下）-学习笔记（一）转换函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cpp面向对象高级编程（下） 学习笔记（一）转换函数">
-<meta property="og:url" content="https://ancen.blog/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:title" content="Cpp Map">
+<meta property="og:url" content="https://ancen.blog/2023/02/25/Cpp-Map/index.html">
 <meta property="og:site_name" content="Ancenの小屋">
-<meta property="og:description" content="转换函数转换函数是类成员函数，用来将对象类型转换为其他类型。 语法1234567&#x2F;* * type 要转换成的类型 * const 转换函数只是转换对象类型，并不会（也不应该）改变对象内的任何成员，设为const * &amp;#123;&amp;#125; 没有参数，转换不需要参数 * @return 没有返回类型，返回类型就是转换成的类型*&#x2F;operator type() const &amp;#123;&amp;#125;">
+<meta property="og:description" content="C++  Cpp面向对象高级编程（下）-学习笔记（一）转换函数">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ancen.blog/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/conversion.png">
-<meta property="og:image" content="https://ancen.blog/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/conversion2.png">
-<meta property="og:image" content="https://ancen.blog/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/neoa.png">
-<meta property="og:image" content="https://ancen.blog/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/neoa2.png">
-<meta property="og:image" content="https://ancen.blog/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/eoa.png">
-<meta property="article:published_time" content="2021-04-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-25T01:47:24.206Z">
+<meta property="article:published_time" content="2023-02-25T01:45:56.000Z">
+<meta property="article:modified_time" content="2023-02-25T01:50:59.864Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="cpp">
-<meta property="article:tag" content="OOP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ancen.blog/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/conversion.png">
   
   
   
-  <title>Cpp面向对象高级编程（下） 学习笔记（一）转换函数 - Ancenの小屋</title>
+  <title>Cpp Map - Ancenの小屋</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -208,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Cpp面向对象高级编程（下） 学习笔记（一）转换函数"></span>
+            <span id="subtitle" data-typed-text="Cpp Map"></span>
           
         </div>
 
@@ -219,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-05-01 00:00" pubdate>
-          2021年5月1日 凌晨
+        <time datetime="2023-02-25 09:45" pubdate>
+          2023年2月25日 上午
         </time>
       </span>
     
@@ -231,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          29 字
         
       </span>
     
@@ -242,7 +235,7 @@
         
         
         
-          10 分钟
+          1 分钟
         
       </span>
     
@@ -280,48 +273,16 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Cpp面向对象高级编程（下） 学习笔记（一）转换函数</h1>
+            <h1 style="display: none">Cpp Map</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h1><p>转换函数是类成员函数，用来将对象类型转换为其他类型。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * type 要转换成的类型</span><br><span class="hljs-comment"> * const 转换函数只是转换对象类型，并不会（也不应该）改变对象内的任何成员，设为const</span><br><span class="hljs-comment"> * &#123;&#125; 没有参数，转换不需要参数</span><br><span class="hljs-comment"> * @return 没有返回类型，返回类型就是转换成的类型</span><br><span class="hljs-comment">*/</span><br><span class="hljs-function"><span class="hljs-keyword">operator</span> <span class="hljs-title">type</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>&#123;&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p><img src="/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/conversion.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>如果后面场合有把Fraction当作double使用，编译器会认为很合理（实际上认为也是合理的，才会这么做）；调用（黄色部分）即可；return type不用给出， 默认由名称里的类型给定。</p>
-<blockquote>
-<p>转换函数通常是const的，因为并不会改变数据。</p>
-<p>Q：编译器如何编译<code>double d = 4 + f;</code>？</p>
-<p>A：首先找有没有全局的<code>operator+(type, Fraction)</code>函数，找到则编译通过（type 为整型或浮点型都可以）；如果走不通，则看<code>f</code>能否转成整型或浮点型（类中是否有相应的conversion function），可以则编译通过。</p>
-<p>只要认为合理，也可以给出转换成其他类型的转换函数。</p>
-</blockquote>
-<h2 id="标准库用到转换函数的地方"><a href="#标准库用到转换函数的地方" class="headerlink" title="标准库用到转换函数的地方"></a>标准库用到转换函数的地方</h2><p><img src="/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/conversion2.png" srcset="/img/loading.gif" lazyload alt></p>
-<blockquote>
-<p>bool模板偏特化。</p>
-</blockquote>
-<p><code>operator[]</code>对中括号做重载，取出第100个位置bool值，传回来bool，却传回蓝色的类型reference。</p>
-<blockquote>
-<p>设计模式：Proxy。</p>
-</blockquote>
-<p>合乎想像的是，蓝色类型reference果然有向bool转换的转换函数。</p>
-<h1 id="转换构造函数"><a href="#转换构造函数" class="headerlink" title="转换构造函数"></a>转换构造函数</h1><p>non-explicit-one-argument constructor；没有explicit的可单传入实参构造函数。one-argument，只需要一个实参（其实是可以多parameter的，其他参数给出默认值即可）；non-explicit，构造函数没有加关键字explicit。</p>
-<h2 id="转换功能"><a href="#转换功能" class="headerlink" title="转换功能"></a>转换功能</h2><p>和上述转换函数方向相反；（没有explicit的可单传入实参构造函数）可以用于把double转换为Fraction类型。</p>
-<p><img src="/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/neoa.png" srcset="/img/loading.gif" lazyload alt></p>
-<blockquote>
-<p>Q：编译器如何编译<code>d2 = f + 4;</code>？</p>
-<p>编译器找到Fraction重载的<code>operator+</code>函数，发现函数参数为Fraction，于是看看4可不可以转成Fraction（隐式转换），由于Fraction有一个non-explicit-one-argument constructor，因此转换成功，该行编译成功。</p>
-</blockquote>
-<h2 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h2><p>当转换函数和无explicit的可单传入实参构造函数同时出现。</p>
-<p><img src="/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/neoa2.png" srcset="/img/loading.gif" lazyload alt></p>
-<blockquote>
-<p>Q：是否可以编译通过？</p>
-<p>不可以！两条路径可行，所以编译器不知道走哪条路径。</p>
-</blockquote>
-<h2 id="explicit"><a href="#explicit" class="headerlink" title="explicit"></a>explicit</h2><p><img src="/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/eoa.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>explicit的可单传入实参构造函数；explicit告诉编译器不可以把3自动变为（隐式转换为）1/3；该构造函数只能以构造函数的形式调用；这里4无法转换，报错转换失败。</p>
-<blockquote>
-<p>explicit只有用在构造函数前面。Cpp面向对象高级编程（下）-学习笔记（一）转换函数.md</p>
-</blockquote>
+                <p>C++</p>
+<ul>
+<li><a href="/2021/05/01/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/" title="Cpp面向对象高级编程（下） 学习笔记（一）转换函数">Cpp面向对象高级编程（下）-学习笔记（一）转换函数</a>
+</li>
+</ul>
 
                 
               </div>
@@ -340,7 +301,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Course/" class="category-chain-item">Course</a>
+  <a href="/categories/Map/" class="category-chain-item">Map</a>
   
   
 
@@ -357,8 +318,6 @@
       
         <a href="/tags/cpp/">#cpp</a>
       
-        <a href="/tags/OOP/">#OOP</a>
-      
     </div>
   
 </div>
@@ -369,8 +328,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Cpp面向对象高级编程（下） 学习笔记（一）转换函数</div>
-      <div>https://ancen.blog/2021/05/01/Cpp面向对象高级编程（下）-学习笔记（一）转换函数/</div>
+      <div>Cpp Map</div>
+      <div>https://ancen.blog/2023/02/25/Cpp-Map/</div>
     </div>
     <div class="license-meta">
       
@@ -382,7 +341,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2021年5月1日</div>
+          <div>2023年2月25日</div>
         </div>
       
       
@@ -414,18 +373,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/01/GameS101-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89Transformation/" title="GameS101 学习笔记（一）Transformation">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GameS101 学习笔记（一）Transformation</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/05/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%94%EF%BC%89%E4%B8%89%E5%A4%A7%E5%87%BD%E6%95%B0/" title="Cpp面向对象高级编程（上） 学习笔记（五）三大函数">
-                        <span class="hidden-mobile">Cpp面向对象高级编程（上） 学习笔记（五）三大函数</span>
+                      <a href="/2023/02/23/Android%E6%8F%92%E4%BB%B6%E5%8C%96-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" title="Android插件化 读书笔记（六）代理模式">
+                        <span class="hidden-mobile">Android插件化 读书笔记（六）代理模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
