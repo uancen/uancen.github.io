@@ -29,8 +29,12 @@
 <meta property="og:image" content="https://ancen.blog/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/block.png">
 <meta property="og:image" content="https://ancen.blog/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/array.png">
 <meta property="og:image" content="https://ancen.blog/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/arraynew.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/static.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/static2.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/singleton2.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/singleton1.png">
 <meta property="article:published_time" content="2021-04-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-25T12:26:50.439Z">
+<meta property="article:modified_time" content="2023-02-26T06:14:21.242Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="cpp">
 <meta property="article:tag" content="OOP">
@@ -232,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          3.1k 字
         
       </span>
     
@@ -243,7 +247,7 @@
         
         
         
-          22 分钟
+          27 分钟
         
       </span>
     
@@ -304,13 +308,16 @@
 <blockquote>
 <p>静态全局对象和一般的全局对象的区别就是一般的全局对象在程序的其他文件中可以通过关键字extern来调用，而static声明的全局变量则只能在本文件中使用。</p>
 </blockquote>
-<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p><strong>stack，是存在于某作用域（scope）的一块内存空间（memory space）</strong>，例如调用函数，函数本身即会形成一个stack用来放置它所接收的参数，以及返回地址。</p>
+<h2 id="栈空间"><a href="#栈空间" class="headerlink" title="栈空间"></a>栈空间</h2><p><strong>stack，是存在于某作用域（scope）的一块内存空间（memory space）</strong>，例如调用函数，函数本身即会形成一个stack用来放置它所接收的参数，以及返回地址。</p>
 <p>在函数本体（function body）内声明的任何变量，其所使用的内存块都取自上述stack。</p>
-<h2 id="栈对象的生命周期"><a href="#栈对象的生命周期" class="headerlink" title="栈对象的生命周期"></a>栈对象的生命周期</h2><p>栈对象（stack object），其声明在作用域（scope）结束之际结束。这种作用域内的对象（object），又叫做local object，因为它会被自动清理（意思是析构函数被自动调用）。</p>
+<h2 id="栈对象"><a href="#栈对象" class="headerlink" title="栈对象"></a>栈对象</h2><blockquote>
+<p>以下主要说栈对象的生命周期。</p>
+</blockquote>
+<p>栈对象（stack object），其声明在作用域（scope）结束之际结束。这种作用域内的对象（object），又叫做local object，因为它会被自动清理（意思是析构函数被自动调用）。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Complex</span>&#123;...&#125;;<br>...<br>&#123;<br>	<span class="hljs-comment">// c1所占用的空间来自于stack</span><br>	<span class="hljs-function">Complex <span class="hljs-title">c1</span><span class="hljs-params">(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>举例，当离开作用域{}的时候，c1的生命自然就消失了， 即从栈中获得的内存，离开作用域的时候会自动释放（析构函数被自动调用）。</p>
-<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>Heap，所谓system heap，是指由操作系统提供的一块global内存空间，程序可动态分配（dynamic allocated）从其中获得若干区块（blocks）。new去取，去动态获得，但是同时也要兼任起动态释放的责任。</p>
-<h2 id="堆对象的生命周期"><a href="#堆对象的生命周期" class="headerlink" title="堆对象的生命周期"></a>堆对象的生命周期</h2><p>当离开作用域{}的时候，动态分配的内存不会消失，即从堆中动态取得的内存不会自动消失，需要手动释放（delete）。</p>
+<h2 id="堆空间"><a href="#堆空间" class="headerlink" title="堆空间"></a>堆空间</h2><p>Heap，所谓system heap，是指由操作系统提供的一块global内存空间，程序可动态分配（dynamic allocated）从其中获得若干区块（blocks）。new去取，去动态获得，但是同时也要兼任起动态释放的责任。</p>
+<h2 id="堆对象"><a href="#堆对象" class="headerlink" title="堆对象"></a>堆对象</h2><p>当离开作用域{}的时候，动态分配的内存不会消失，即从堆中动态取得的内存不会自动消失，需要手动释放（delete）。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// A</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Complex</span>&#123;...&#125;;<br>...<br>&#123;<br>	Complex *p = <span class="hljs-keyword">new</span> Complex;<br>	...<br>	<span class="hljs-keyword">delete</span> p;<br>&#125;<br><span class="hljs-comment">// B</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Complex</span>&#123;...&#125;;<br>...<br>&#123;<br>	Complex *p = <span class="hljs-keyword">new</span> Complex;<br>	...<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>A：p所指向的便是heap object，因为是动态从操作系统某个地方分配的内存，其生命周期在它被delete之际（此时默认析构函数或者手写析构函数被调用）结束。</p>
 <p>B：会出现内存泄露（memory leak），因为当作用域结束后，<strong>p所指向的heap object仍然存在，但是指针p的生命却结束了</strong>，作用域之外再也看不到p，也就没机会delete p。</p>
@@ -342,6 +349,18 @@
 <p>array new一定要搭配array delete，在使用指针新建字符数组的情况下，在手动释放内存的时候，如果<code>delete[] p;</code>写成了<code>delete p;</code>会造成内存泄露；因为3次析构函数各自负责把各自分配的动态内存叉掉，没有[]，则只会调用一次析构函数。</p>
 <p>值得注意的是，错误用法<code>delete p;</code>导致出现的内存泄漏是String类中的指针指向的空间，而非指针本身。</p>
 <p>如果是Complex 数组对象，因为其中没有指针，所以就算是使用<code>delete p;</code>也是没有问题的。但是为了万无一失，如果使用了array new 一定要搭配 array delete。</p>
+<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>包括静态对象和静态函数。</p>
+<p><img src="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/static.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>非static函数通过传入的this指针找到要处理的对象。如上所示：c1调用real()；c1的地址即指针就是this pointer，所以c1和c2虽然调用相同函数，但是给到不同数据。</p>
+<p>成员函数只有一份，但是需要处理很多对象，所以需要人告诉他处理什么（this），成员函数里需要使用this（黄色），可写可不写。</p>
+<p>static函数没有this指针，只能处理静态数据；当数据只需要一份、只能唯一值时，需要定义为静态；静态函数没有this pointer，不可以访问处理多个对象，显然只可以存取处理静态数据。</p>
+<p><img src="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/static2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>静态数据需要在类外进行声明；调用静态函数有两种方法，通过对象或者class name调用。</p>
+<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p>把构造函数放在private。</p>
+<p><img src="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/singleton2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>有的class只希望产生一个对象；A类对象在private里已经有一个了；且A的构造函数放在private中，外界无法使用。设计静态函数getInstance，使外界可以得到唯一的A；再从这个唯一对象调用类函数。</p>
+<p><img src="/2021/04/06/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AD%EF%BC%89%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/singleton1.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>但是版本1有一个问题，即外界不需要时，A仍然存在；所以把静态自己放在getInstance中，当有人调用getInstance时，才会创建；且有人用后，该对象持续存在。</p>
 
                 
               </div>
@@ -434,9 +453,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/20/Cpp-Primer-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%B1%BB/" title="Cpp Primer 读书笔记 第七章类">
+                      <a href="/2021/04/07/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89%E6%A8%A1%E6%9D%BF/" title="Cpp面向对象高级编程（上） 学习笔记（六）内存管理">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Cpp Primer 读书笔记 第七章类</span>
+                        <span class="hidden-mobile">Cpp面向对象高级编程（上） 学习笔记（六）内存管理</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
