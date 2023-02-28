@@ -16,23 +16,28 @@
   <meta name="author" content="Ancen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Object Oriented Programming  Inheritance Composition Delegation   Composition has-a。  复合关系 黄色表示这个class queue中，有一个这种sequence类东西；且默认为deque&lt;T&gt;类型，即这个sequence是deque&lt;T&gt;；从C开始存在这种关系  图，黑色菱形，即表示Co">
+    <meta name="description" content="Object Oriented Programming  Inheritance Composition Delegation   Composition has-a.  复合关系 黄色表示这个class queue中，有一个这种sequence类东西；且默认为deque&lt;T&gt;类型，即这个sequence是deque&lt;T&gt;；从C开始存在这种关系  图，黑色菱形，即表示Co">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cpp面向对象高级编程（上） 学习笔记（八）类间关系">
 <meta property="og:url" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/index.html">
 <meta property="og:site_name" content="Ancenの小屋">
-<meta property="og:description" content="Object Oriented Programming  Inheritance Composition Delegation   Composition has-a。  复合关系 黄色表示这个class queue中，有一个这种sequence类东西；且默认为deque&lt;T&gt;类型，即这个sequence是deque&lt;T&gt;；从C开始存在这种关系  图，黑色菱形，即表示Co">
+<meta property="og:description" content="Object Oriented Programming  Inheritance Composition Delegation   Composition has-a.  复合关系 黄色表示这个class queue中，有一个这种sequence类东西；且默认为deque&lt;T&gt;类型，即这个sequence是deque&lt;T&gt;；从C开始存在这种关系  图，黑色菱形，即表示Co">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/composition.png">
 <meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/adapter.png">
 <meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/sizeof.png">
 <meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/compositionctordtor.png">
 <meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/Untitled%20(34">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/inheritance.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/inheritance2.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/virtual1.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/virtual2.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/virtual3.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/virtual4.png">
 <meta property="article:published_time" content="2021-04-07T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-26T16:01:21.558Z">
+<meta property="article:modified_time" content="2023-02-28T06:43:31.029Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="cpp">
-<meta property="article:tag" content="OOP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ancen.blog/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/composition.png">
   
@@ -231,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          2.3k 字
         
       </span>
     
@@ -242,7 +247,7 @@
         
         
         
-          10 分钟
+          19 分钟
         
       </span>
     
@@ -294,7 +299,7 @@
 </ul>
 </blockquote>
 <h1 id="Composition"><a href="#Composition" class="headerlink" title="Composition"></a>Composition</h1><blockquote>
-<p>has-a。</p>
+<p>has-a.</p>
 </blockquote>
 <h2 id="复合关系"><a href="#复合关系" class="headerlink" title="复合关系"></a>复合关系</h2><p><img src="/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/composition.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>黄色表示这个class queue中，有一个这种sequence类东西；且默认为<code>deque&lt;T&gt;</code>类型，即这个sequence是<code>deque&lt;T&gt;</code>；从C开始存在这种关系</p>
@@ -322,7 +327,36 @@
 <p>指针rep指向另外一个StringRepclass，左边只是有一个指针指向右边（composition by reference）；Delegation又叫Composition by reference，因为也是拥有，只是拥有的只是个指针；也可以说，两个类之间用指针相连，就叫做 Delegation。</p>
 <p>因为需要右边的时候才创建右边，所以左右两边的生命不同步。</p>
 <p>String类中的所有操作都是通过rep指针来实现的，这种方式叫做pointer to implementation（pimpl），指针指向实现功能的类；这种设计的好处是，右边无论怎么变化都不影响左边，这种手法又叫做“编译防火墙”。</p>
-<p>另一个名称叫做Handle&amp;&amp;Body，左边是Handle，右边是Body；意思是左边只负责对外的接口；而右边负责实现各种功能；之后指针其实可以指向不同的实现类（弹性），客户端可以不受影响且左边可以不用重复编译；</p>
+<p>另一个名称叫做Handle&amp;&amp;Body，左边是Handle，右边是Body；意思是左边只负责对外的接口；而右边负责实现各种功能；之后指针其实可以指向不同的实现类（弹性），客户端可以不受影响且左边可以不用重复编译。</p>
+<p>这种做法另一个目的是为了做共享reference counting，三个String对象 a、b和c，都在用字符串”Hello”，三个对象共享 “Hello”，现在 n 是 3。内容一样才能共享。</p>
+<blockquote>
+<p>如果 a 想修改字符串的内容，但是不影响 b 和 c，那就拷贝一份让 a 去更改，然后就只剩下 b和 c 共享字符串。这是copy-on-write，就是写的时候copy一份副本让你去写。</p>
+</blockquote>
+<h1 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h1><blockquote>
+<p>is a.</p>
+</blockquote>
+<p><img src="/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/inheritance.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>public继承：is a关系；这里只有data，还没有函数，这里子类继承了父类的数据（两个指针）。</p>
+<h2 id="继承关系下的构造与析构"><a href="#继承关系下的构造与析构" class="headerlink" title="继承关系下的构造与析构"></a>继承关系下的构造与析构</h2><p><img src="/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/inheritance2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>子类的对象中有父类的成分；父类的析构函数必须是virtual的，否则会出现undefined behavior；红色部分是编译器添加的；谁先谁后已经是编译器完成了，程序员不用操心。</p>
+<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p><img src="/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/virtual1.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>语法，在函数前加上virtual；函数继承，继承的是调用权，子类可以调用父类的函数；子类是否需要重新定义，看virtual类型。</p>
+<h2 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h2><p><img src="/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/virtual2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>输入文件名称后，按下开始键后，程序会收到一个文件名；程序要检测file name是否正确，是否有不合法字符；到硬盘中查找file是否存在；如果存在，则将该文件打开，并读出来。</p>
+<h3 id="Template-Method"><a href="#Template-Method" class="headerlink" title="Template Method"></a>Template Method</h3><p>上面的这个流程所有的软件都是一样的，除了最后将文件读出来有所区别；将这个框架写成模板，即CDocument类，其中读内容动作没法做，所以只在父类定义虚函数Serialize，这里可以设计为纯虚函数，也可以设计为默认定义的函数，也可以是空函数。</p>
+<p><img src="/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/virtual3.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>子类对象调用父类函数OnFileOpen()，子类中没有函数OnFileOpen()，myDoc.OnFileOpen()实际调用CDocument::OnFileOpen(&amp;myDoc)，所以才能找到CDocument类中的OnFileOpen函数。</p>
+<p><code>CDocument::OnFileOpen(&amp;myDoc);</code>中传入了myDoc的地址，调用Serialize的时候，编译器通过this进行调用，即this-&gt;Serialize()，而this就是myDoc，也就调用了CMyDoc类的Serialized()函数。</p>
+<p>myDoc.OnFileOpen()的执行流程：</p>
+<ol>
+<li>调用CDocument的OnFileOpen函数；</li>
+<li>在OnFileOpen函数里调用了CMyDoc的Serialize()函数；</li>
+<li>执行完了Seriazlize()函数后又回到OnFileOpen()函数中继续执行；</li>
+<li>OnFileOpen函数执行完毕后，回到main函数中。</li>
+</ol>
+<p>过程如图中的灰色线所示。将关键动作Serialize延缓到了子类中执行。将OnFileOpen()这个函数的这种做法叫做<strong>Template Method</strong>模式。</p>
+<h3 id="代码模拟"><a href="#代码模拟" class="headerlink" title="代码模拟"></a>代码模拟</h3><p>模拟该过程的代码。</p>
+<p><img src="/2021/04/08/Cpp%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%8A%EF%BC%89-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%85%AB%EF%BC%89%E7%B1%BB%E9%97%B4%E5%85%B3%E7%B3%BB/virtual4.png" srcset="/img/loading.gif" lazyload alt></p>
 
                 
               </div>
@@ -357,8 +391,6 @@
       <i class="iconfont icon-tags"></i>
       
         <a href="/tags/cpp/">#cpp</a>
-      
-        <a href="/tags/OOP/">#OOP</a>
       
     </div>
   

@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://ancen.blog/2022/04/01/GameS202-Note-Real-time-Shadows/blockerdistance.png">
 <meta property="og:image" content="https://ancen.blog/2022/04/01/GameS202-Note-Real-time-Shadows/blockerrange.png">
 <meta property="article:published_time" content="2022-03-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-27T09:31:18.826Z">
+<meta property="article:modified_time" content="2023-02-27T10:20:13.161Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="Graphics">
 <meta name="twitter:card" content="summary_large_image">
@@ -327,7 +327,7 @@
 <p>cons2: Aliasing</p>
 <p>the resolution of the Shadow Map，对场景具有分辨率的表现。</p>
 <p>解决方法：Cascaded Shadow Map（工业界）。</p>
-<h1 id="SM-Math"><a href="#SM-Math" class="headerlink" title="SM Math"></a>SM Math</h1><blockquote>
+<h2 id="数学原理"><a href="#数学原理" class="headerlink" title="数学原理"></a>数学原理</h2><blockquote>
 <p>详细说下SM背后的数学，为后面内容做准备。</p>
 </blockquote>
 <p>An important approximation through RTR, by the way, care more about “approximately equal”.</p>
@@ -392,7 +392,7 @@
 <p>计算shadow map的时候在光源处设置过相机，并把shadow map放在由相机看向场景形成的视锥中的近截面上；将光源shading point相连，在shadow map上截出来的面就是要查询计算平均遮挡距离的部分。这部分的深度求一个均值，就是Blocker到光源的平均遮挡距离。</p>
 <p>这种方法make sense在于离光源越远，遮挡物也会更多，所以需要在Shadow map上的一个小区域内查找blocker；离光源越近，遮挡物会少，所以需要在Shadow map上的一个大区域内查找blocker；且近的物体相对变大，其自身形状也需求大范围的检查。</p>
 <h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>确定Blocker需要一遍访问次数；PCF又要对这个特定区域走一遍；对于多光源，需要逐个处理；且线性时间。存在各种方法处理。</p>
-<h2 id="数学原理"><a href="#数学原理" class="headerlink" title="数学原理"></a>数学原理</h2><h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2>
+<h2 id="数学原理-1"><a href="#数学原理-1" class="headerlink" title="数学原理"></a>数学原理</h2><h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2>
                 
               </div>
             
