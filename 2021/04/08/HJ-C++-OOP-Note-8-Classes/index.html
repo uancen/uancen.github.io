@@ -1,0 +1,819 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=light>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ancen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Object Oriented Programming  Inheritance Composition Delegation   Composition has-a.  复合关系 黄色表示这个class queue中，有一个这种sequence类东西；且默认为deque&lt;T&gt;类型，即这个sequence是deque&lt;T&gt;；从C开始存在这种关系  图，黑色菱形，即表示Co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HJ C++ OOP Note 8 Classes">
+<meta property="og:url" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/index.html">
+<meta property="og:site_name" content="Ancenの小屋">
+<meta property="og:description" content="Object Oriented Programming  Inheritance Composition Delegation   Composition has-a.  复合关系 黄色表示这个class queue中，有一个这种sequence类东西；且默认为deque&lt;T&gt;类型，即这个sequence是deque&lt;T&gt;；从C开始存在这种关系  图，黑色菱形，即表示Co">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/composition.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/adapter.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/sizeof.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/compositionctordtor.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/hb.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/inheritance.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/inheritance2.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/virtual1.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/virtual2.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/virtual3.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/virtual4.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/ic1.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/ic2.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/di1.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/di2.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/di4.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/di5.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/pt1.png">
+<meta property="og:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/pt2.png">
+<meta property="article:published_time" content="2021-04-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-01T07:14:12.884Z">
+<meta property="article:author" content="Ancen">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/composition.png">
+  
+  
+  
+  <title>HJ C++ OOP Note 8 Classes - Ancenの小屋</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/fluid-extension.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"ancen.blog","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Ancen</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="HJ C++ OOP Note 8 Classes"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-04-08 00:00" pubdate>
+          2021年4月8日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          31 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">HJ C++ OOP Note 8 Classes</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>Object Oriented Programming</p>
+<ul>
+<li>Inheritance</li>
+<li>Composition</li>
+<li>Delegation</li>
+</ul>
+</blockquote>
+<h1 id="Composition"><a href="#Composition" class="headerlink" title="Composition"></a>Composition</h1><blockquote>
+<p>has-a.</p>
+</blockquote>
+<h2 id="复合关系"><a href="#复合关系" class="headerlink" title="复合关系"></a>复合关系</h2><p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/composition.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>黄色表示这个class queue中，有一个这种sequence类东西；且默认为<code>deque&lt;T&gt;</code>类型，即这个sequence是<code>deque&lt;T&gt;</code>；从C开始存在这种关系</p>
+<blockquote>
+<p>图，黑色菱形，即表示Composition。</p>
+</blockquote>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/adapter.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>deque中可能有很多接口，但是queue只开放这几个，queue的所有功能都是通过deque来完成的，这种模式叫做<strong>Adapter模式</strong>，字如其名，改造适配。</p>
+<p>该例子是个特例，并不是所有的Composition都是这样（实现全部挂钩），只要拥有即可；有了<code>Container</code>就有<code>Componenet</code>，生命是一起的；复合就是一种结构中包含其他类型或者结构。</p>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/sizeof.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>内存角度解释Composition，queue中的 c 所占的空间为40Bytes；后面的图为deque内部以及 Itr 类内部的数据，明白地显示了为什么 c 的大小为 40Bytes。</p>
+<h2 id="复合关系下的构造和析构"><a href="#复合关系下的构造和析构" class="headerlink" title="复合关系下的构造和析构"></a>复合关系下的构造和析构</h2><p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/compositionctordtor.png" srcset="/img/loading.gif" lazyload alt></p>
+<blockquote>
+<p>构造函数间不可越俎代庖。</p>
+</blockquote>
+<p>左边拥有右边，左边叫做Container，右边叫做Component。</p>
+<p>红色的部分是编译器自动加上的，并非程序员写的；可能内部的Component有多个构造函数，但是编译器不知道需要哪个，所以就调用一个默认的构造函数，如果这并不是你期望的，那就需要自己在Comtainer的构造函数的初始列位置写上要调用的构造函数。</p>
+<blockquote>
+<p>构造函数总是调用默认的构造函数，如果需要其他构造函数需要自己写、参数。</p>
+</blockquote>
+<h1 id="Delegation"><a href="#Delegation" class="headerlink" title="Delegation"></a>Delegation</h1><blockquote>
+<p>Composition by reference.</p>
+</blockquote>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/hb.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>指针rep指向另外一个StringRepclass，左边只是有一个指针指向右边（composition by reference）；Delegation又叫Composition by reference，因为也是拥有，只是拥有的只是个指针；也可以说，两个类之间用指针相连，就叫做 Delegation。</p>
+<p>因为需要右边的时候才创建右边，所以左右两边的生命不同步。</p>
+<p>String类中的所有操作都是通过rep指针来实现的，这种方式叫做pointer to implementation（pimpl），指针指向实现功能的类；这种设计的好处是，右边无论怎么变化都不影响左边，这种手法又叫做“编译防火墙”。</p>
+<p>另一个名称叫做Handle&amp;&amp;Body，左边是Handle，右边是Body；意思是左边只负责对外的接口；而右边负责实现各种功能；之后指针其实可以指向不同的实现类（弹性），客户端可以不受影响且左边可以不用重复编译。</p>
+<p>这种做法另一个目的是为了做共享reference counting，三个String对象 a、b和c，都在用字符串”Hello”，三个对象共享 “Hello”，现在 n 是 3。内容一样才能共享。</p>
+<blockquote>
+<p>如果 a 想修改字符串的内容，但是不影响 b 和 c，那就拷贝一份让 a 去更改，然后就只剩下 b和 c 共享字符串。这是copy-on-write，就是写的时候copy一份副本让你去写。</p>
+</blockquote>
+<h1 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h1><blockquote>
+<p>is a.</p>
+</blockquote>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/inheritance.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>public继承：is a关系；这里只有data，还没有函数，这里子类继承了父类的数据（两个指针）。</p>
+<h2 id="继承关系下的构造与析构"><a href="#继承关系下的构造与析构" class="headerlink" title="继承关系下的构造与析构"></a>继承关系下的构造与析构</h2><p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/inheritance2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>子类的对象中有父类的成分；父类的析构函数必须是virtual的，否则会出现undefined behavior；红色部分是编译器添加的；谁先谁后已经是编译器完成了，程序员不用操心。</p>
+<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/virtual1.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>语法，在函数前加上virtual；函数继承，继承的是调用权，子类可以调用父类的函数；子类是否需要重新定义，看virtual类型。</p>
+<h2 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h2><p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/virtual2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>输入文件名称后，按下开始键后，程序会收到一个文件名；程序要检测file name是否正确，是否有不合法字符；到硬盘中查找file是否存在；如果存在，则将该文件打开，并读出来。</p>
+<h3 id="Template-Method"><a href="#Template-Method" class="headerlink" title="Template Method"></a>Template Method</h3><p>上面的这个流程所有的软件都是一样的，除了最后将文件读出来有所区别；将这个框架写成模板，即CDocument类，其中读内容动作没法做，所以只在父类定义虚函数Serialize，这里可以设计为纯虚函数，也可以设计为默认定义的函数，也可以是空函数。</p>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/virtual3.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>子类对象调用父类函数OnFileOpen()，子类中没有函数OnFileOpen()，myDoc.OnFileOpen()实际调用CDocument::OnFileOpen(&amp;myDoc)，所以才能找到CDocument类中的OnFileOpen函数。</p>
+<p><code>CDocument::OnFileOpen(&amp;myDoc);</code>中传入了myDoc的地址，该地址也传入OnFileOpen；调用Serialize的时候，编译器通过this进行调用，即this-&gt;Serialize()，而this就是myDoc，也就调用了CMyDoc类的Serialized()函数。</p>
+<p>myDoc.OnFileOpen()的执行流程：</p>
+<ol>
+<li>调用CDocument的OnFileOpen函数；</li>
+<li>在OnFileOpen函数里调用了CMyDoc的Serialize()函数；</li>
+<li>执行完了Seriazlize()函数后又回到OnFileOpen()函数中继续执行；</li>
+<li>OnFileOpen函数执行完毕后，回到main函数中。</li>
+</ol>
+<p>过程如图中的灰色线所示。将关键动作Serialize延缓到了子类中执行。将OnFileOpen()这个函数的这种做法叫做<strong>Template Method</strong>模式。</p>
+<blockquote>
+<p>Java语言中的函数称为Method。</p>
+<p>框架，将相同功能的确定的写好，留下不能确定的部分设计为虚函数，留给子类实现。</p>
+</blockquote>
+<h3 id="代码模拟"><a href="#代码模拟" class="headerlink" title="代码模拟"></a>代码模拟</h3><p>模拟该过程的代码。</p>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/virtual4.png" srcset="/img/loading.gif" lazyload alt></p>
+<h1 id="Inheritance-Composition"><a href="#Inheritance-Composition" class="headerlink" title="Inheritance + Composition"></a>Inheritance + Composition</h1><h2 id="构造与析构"><a href="#构造与析构" class="headerlink" title="构造与析构"></a>构造与析构</h2><p>两种情况：Derived继承Base后，复合Component；Derived继承，复合Component的Base。</p>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/ic1.png" srcset="/img/loading.gif" lazyload alt></p>
+<blockquote>
+<p>第二种比较好想，Componet→Base→Derived，析构Derived→Base→Componet。</p>
+</blockquote>
+<p>第一种以重要性记忆，Base在前，先构造后析构。</p>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/ic2.png" srcset="/img/loading.gif" lazyload alt></p>
+<h1 id="Delegation-Inheritance"><a href="#Delegation-Inheritance" class="headerlink" title="Delegation + Inheritance"></a>Delegation + Inheritance</h1><h2 id="Observer"><a href="#Observer" class="headerlink" title="Observer"></a>Observer</h2><p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/di1.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>Document，多开窗口，打开同一文件；或者对于一个数据，多种View查看；要求数据变化，则多窗口下或者多视角下，同时发生变化。</p>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/di2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>抽象出Observer，且使使用者Subject可以拥有多个Observer；Subject vector容器放指向Observer的指针，注意到Observer可被继承，即可以派生出多种功能的Observer，均可被放在Subject容器中。</p>
+<p>Subject提供注册、注销、遍历通知的功能；遍历通知，遍历调用update即可。</p>
+<blockquote>
+<p>这就是OOP。</p>
+</blockquote>
+<h2 id="Composite"><a href="#Composite" class="headerlink" title="Composite"></a>Composite</h2><p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/di4.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>希望写一个目录系统；Primitive代表文件，Composite代表文件夹，可以容纳多个文件，但同时也可以容纳文件夹；对于Component设计为，Primitive-is a-Component，Composite-is a-Component；于是，Composite不写死为放Primitive或者Composite（都可以放），而是放Component。</p>
+<blockquote>
+<p>以上，都是放指针，不额外说明。</p>
+<p>add设计同理，加文件和文件夹都可以；add不可以设置为纯虚函数，Primitive无法做add的动作。</p>
+</blockquote>
+<h2 id="Prototype"><a href="#Prototype" class="headerlink" title="Prototype"></a>Prototype</h2><p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/di5.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>希望树状继承体系，可以创建未来才会出现的子类；设计一个框架，客户买后，才会派生子类；无法new，因为不知道类名，希望派生类有原型，框架看到后作为蓝本，进而创建。</p>
+<p>原型，子类中安排一个静态对象，类型为class自己；每个子类将原型登记到框架端，则框架相对的需要准备空间；子类构造函数设为私有，自己创建一份，可以调用，构造函数内的addPrototype将指针放到prototypes里；子类设计clone，可以new自己，框架端通过原型调用clone函数，没有原型则无法调用；设想clone可以设置为静态函数，使框架直接调用，问题在于静态函数调用需要classname，而框架不知道类名。</p>
+<p>子类有一些负担，私有构造函数等，但为了和框架搭配，是值得的。</p>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/pt1.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>clone纯虚函数，要求子类必须给出，容器数组放原型。class里静态的data必须在类外做定义（给内存）。findAddClone让框架端在容器里找原型（实际可能是靠名称找），找到之后调用该原型的clone。</p>
+<p><img src="/2021/04/08/HJ-C++-OOP-Note-8-Classes/pt2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>clone实现，总是new自己；原型，静态自己，创建在私有区域，创建出来时候调用构造函数，这里把自己放在框架容器内；两个构造函数，即#带参构造函数有什么用，框架利用原型clone时，需要new，这里使用的构造函数，不能再把对象放上去，因为框架容器只放原型，于是再写#带参构造函数，同时该构造函数仍然不打算让外界创建，希望让原型使用，所以private或者protected，又希望其和初始构造函数区别，带一个参数，但实际上完全没有使用。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Course/" class="category-chain-item">Course</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C/">#C++</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>HJ C++ OOP Note 8 Classes</div>
+      <div>https://ancen.blog/2021/04/08/HJ-C++-OOP-Note-8-Classes/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Ancen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年4月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/01/HJ-C++-OOP-Note-9-Conversion-Function/" title="HJ C++ OOP Note 9 Conversion Function">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HJ C++ OOP Note 9 Conversion Function</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/07/HJ-C++-OOP-Note-7-Template/" title="HJ C++ OOP Note 7 Template">
+                        <span class="hidden-mobile">HJ C++ OOP Note 7 Template</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
