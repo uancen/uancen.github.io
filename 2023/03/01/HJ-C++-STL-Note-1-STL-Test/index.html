@@ -16,18 +16,21 @@
   <meta name="author" content="Ancen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="六大组件 STL是GP最成功的作品，深入STL即是深入探索泛型编程。">
+    <meta name="description" content="Components STL是GP最成功的作品，深入STL即是深入探索泛型编程。  C++ Standard Library；注意命名空间，所有组件封装于std，所以常常把std命名空间全部打开，也可以部分打开。  Standard Template Library，占据C++ Standard Library约70%，分为六大组件。  C++不同编译器、开发工具下，标准库一样。   容器帮忙解决">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HJ C++ STL Note 1 STL Test">
 <meta property="og:url" content="https://ancen.blog/2023/03/01/HJ-C++-STL-Note-1-STL-Test/index.html">
 <meta property="og:site_name" content="Ancenの小屋">
-<meta property="og:description" content="六大组件 STL是GP最成功的作品，深入STL即是深入探索泛型编程。">
+<meta property="og:description" content="Components STL是GP最成功的作品，深入STL即是深入探索泛型编程。  C++ Standard Library；注意命名空间，所有组件封装于std，所以常常把std命名空间全部打开，也可以部分打开。  Standard Template Library，占据C++ Standard Library约70%，分为六大组件。  C++不同编译器、开发工具下，标准库一样。   容器帮忙解决">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ancen.blog/2023/03/01/HJ-C++-STL-Note-1-STL-Test/header.png">
+<meta property="og:image" content="https://ancen.blog/2023/03/01/HJ-C++-STL-Note-1-STL-Test/six.png">
 <meta property="article:published_time" content="2023-02-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-01T09:08:38.619Z">
+<meta property="article:modified_time" content="2023-03-01T15:48:04.961Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ancen.blog/2023/03/01/HJ-C++-STL-Note-1-STL-Test/header.png">
   
   
   
@@ -224,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          33 字
+          330 字
         
       </span>
     
@@ -235,7 +238,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -278,8 +281,22 @@
             
               <div class="markdown-body">
                 
-                <h1 id="六大组件"><a href="#六大组件" class="headerlink" title="六大组件"></a>六大组件</h1><blockquote>
+                <h1 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h1><blockquote>
 <p>STL是GP最成功的作品，深入STL即是深入探索泛型编程。</p>
+</blockquote>
+<p>C++ Standard Library；注意命名空间，所有组件封装于std，所以常常把std命名空间全部打开，也可以部分打开。</p>
+<p><img src="/2023/03/01/HJ-C++-STL-Note-1-STL-Test/header.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>Standard Template Library，占据C++ Standard Library约70%，分为六大组件。</p>
+<blockquote>
+<p>C++不同编译器、开发工具下，标准库一样。</p>
+</blockquote>
+<p><img src="/2023/03/01/HJ-C++-STL-Note-1-STL-Test/six.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>容器帮忙解决内存的问题，其背后需要分配器支持；对容器的操作，有些操作容器本身做，更多独立为模板函数，变成Algorithms。</p>
+<blockquote>
+<p>数据在容器里，而操作数据的函数却在算法里，即不在其本身class中，基本思想就和OO不一致，</p>
+</blockquote>
+<h2 id="Containers"><a href="#Containers" class="headerlink" title="Containers"></a>Containers</h2><blockquote>
+<p>Program = Data Structures + Algorithm.</p>
 </blockquote>
 
                 

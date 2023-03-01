@@ -8,7 +8,7 @@
     <link href="/2023/03/01/HJ-C++-STL-Note-1-STL-Test/"/>
     <url>/2023/03/01/HJ-C++-STL-Note-1-STL-Test/</url>
     
-    <content type="html"><![CDATA[<h1 id="六大组件"><a href="#六大组件" class="headerlink" title="六大组件"></a>六大组件</h1><blockquote><p>STL是GP最成功的作品，深入STL即是深入探索泛型编程。</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h1 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h1><blockquote><p>STL是GP最成功的作品，深入STL即是深入探索泛型编程。</p></blockquote><p>C++ Standard Library；注意命名空间，所有组件封装于std，所以常常把std命名空间全部打开，也可以部分打开。</p><p><img src="/2023/03/01/HJ-C++-STL-Note-1-STL-Test/header.png" alt></p><p>Standard Template Library，占据C++ Standard Library约70%，分为六大组件。</p><blockquote><p>C++不同编译器、开发工具下，标准库一样。</p></blockquote><p><img src="/2023/03/01/HJ-C++-STL-Note-1-STL-Test/six.png" alt></p><p>容器帮忙解决内存的问题，其背后需要分配器支持；对容器的操作，有些操作容器本身做，更多独立为模板函数，变成Algorithms。</p><blockquote><p>数据在容器里，而操作数据的函数却在算法里，即不在其本身class中，基本思想就和OO不一致，</p></blockquote><h2 id="Containers"><a href="#Containers" class="headerlink" title="Containers"></a>Containers</h2><blockquote><p>Program = Data Structures + Algorithm.</p></blockquote>]]></content>
     
     
     <categories>
@@ -333,7 +333,7 @@
     <link href="/2020/09/15/HUST-Data-Structures-Ex-2-Majority-Element/"/>
     <url>/2020/09/15/HUST-Data-Structures-Ex-2-Majority-Element/</url>
     
-    <content type="html"><![CDATA[<h1 id="快速求幂"><a href="#快速求幂" class="headerlink" title="快速求幂"></a>快速求幂</h1><h1 id="求主元"><a href="#求主元" class="headerlink" title="求主元"></a>求主元</h1>]]></content>
+    <content type="html"><![CDATA[<h1 id="快速求幂"><a href="#快速求幂" class="headerlink" title="快速求幂"></a>快速求幂</h1><p>要求，以2为底和以2为底的算法分别求幂；分析两种算法的复杂程度。</p><h2 id="以2为底"><a href="#以2为底" class="headerlink" title="以2为底"></a>以2为底</h2><p>以2为底，缓存中间结果；<code>x^4=x^2*x^2</code>；<code>x^8=x^4*x^4</code>；递归；每经过一次递归调用，问题规模减半。</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure><h1 id="求主元"><a href="#求主元" class="headerlink" title="求主元"></a>求主元</h1>]]></content>
     
     
     <categories>
