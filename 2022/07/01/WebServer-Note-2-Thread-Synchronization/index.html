@@ -16,22 +16,23 @@
   <meta name="author" content="Ancen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="操作系统定义 没有定义！OS&#x3D;&#x3D;OS的“全部”。  Operating System A body of software, in fact, that is responsible for making it easy to run programs (even allowing you to seemingly run many at the same time), allowing prog">
+    <meta name="description" content="项目介绍基于Linux的轻量级多线程网络服务器。 网络服务器 一个服务器软件（程序），或者是运行这个服务器软件的硬件（计算机）。 功能：通过HTTP协议与客户端（通常是浏览器）进行通信，来接收，存储，处理来自客户端的HTTP请求，并对其请求做出HTTP响应，返回给客户端其请求的内容（文件、网页等）或返回一个Error信息。  用户与网络服务器的通信方式 通常用户使用web浏览器与相应服务器进行通信">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NJU Operating System Note 1 Introduction">
-<meta property="og:url" content="https://ancen.blog/2023/02/22/NJU-Operating-System-Note-1-Introduction/index.html">
+<meta property="og:title" content="WebServer Note 1 Backgroud">
+<meta property="og:url" content="https://ancen.blog/2022/07/01/WebServer-Note-2-Thread-Synchronization/index.html">
 <meta property="og:site_name" content="Ancenの小屋">
-<meta property="og:description" content="操作系统定义 没有定义！OS&#x3D;&#x3D;OS的“全部”。  Operating System A body of software, in fact, that is responsible for making it easy to run programs (even allowing you to seemingly run many at the same time), allowing prog">
+<meta property="og:description" content="项目介绍基于Linux的轻量级多线程网络服务器。 网络服务器 一个服务器软件（程序），或者是运行这个服务器软件的硬件（计算机）。 功能：通过HTTP协议与客户端（通常是浏览器）进行通信，来接收，存储，处理来自客户端的HTTP请求，并对其请求做出HTTP响应，返回给客户端其请求的内容（文件、网页等）或返回一个Error信息。  用户与网络服务器的通信方式 通常用户使用web浏览器与相应服务器进行通信">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-22T13:35:45.000Z">
-<meta property="article:modified_time" content="2023-03-01T07:30:22.019Z">
+<meta property="article:published_time" content="2022-06-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-04T01:48:15.633Z">
 <meta property="article:author" content="Ancen">
-<meta property="article:tag" content="Operating System">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>NJU Operating System Note 1 Introduction - Ancenの小屋</title>
+  <title>WebServer Note 1 Backgroud - Ancenの小屋</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="NJU Operating System Note 1 Introduction"></span>
+            <span id="subtitle" data-typed-text="WebServer Note 1 Backgroud"></span>
           
         </div>
 
@@ -212,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-22 21:35" pubdate>
-          2023年2月22日 晚上
+        <time datetime="2022-07-01 00:00" pubdate>
+          2022年7月1日 凌晨
         </time>
       </span>
     
@@ -224,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          233 字
         
       </span>
     
@@ -235,7 +236,7 @@
         
         
         
-          22 分钟
+          2 分钟
         
       </span>
     
@@ -273,37 +274,24 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">NJU Operating System Note 1 Introduction</h1>
+            <h1 style="display: none">WebServer Note 1 Backgroud</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
-<p>没有定义！OS==OS的“全部”。</p>
-</blockquote>
-<p>Operating System</p>
-<p>A body of software, in fact, that is responsible for <em>making it easy to run programs</em> (even allowing you to seemingly run many at the same time), allowing programs to share memory, enabling programs to interact with devices, and other fun stuff like that.</p>
-<h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p>Hardware</p>
-<p>计算机硬件（电路）；公理系统。</p>
-<p>Software</p>
-<p><strong>.c -&gt; .s -&gt; .o -&gt; a.out</strong>（视角一）穿过OS，<strong>计算机执行指令序列（ISA）</strong>（视角二）。</p>
-<p>举例，CPU（RISC-V）模拟器，取出指令并执行；<a href="#鸡兔同笼问题">解决鸡兔同笼问题</a>。</p>
-<p><strong>操作系统，狭义，硬件和软件的中间层（自然管理了软件、硬件资源），支持程序运行。</strong></p>
-<ul>
-<li>程序视角：对象 + API；</li>
-<li>硬件视角：C program。 </li>
+                <h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><p>基于Linux的轻量级多线程网络服务器。</p>
+<h3 id="网络服务器"><a href="#网络服务器" class="headerlink" title="网络服务器"></a>网络服务器</h3><ul>
+<li>一个服务器软件（程序），或者是运行这个服务器软件的硬件（计算机）。</li>
+<li>功能：通过HTTP协议与客户端（通常是浏览器）进行通信，来接收，存储，处理来自客户端的HTTP请求，并对其请求做出HTTP响应，返回给客户端其请求的内容（文件、网页等）或返回一个Error信息。</li>
 </ul>
-<blockquote>
-<p>分布式系统中，对集群的抽象。</p>
-</blockquote>
-<h1 id="程序视角"><a href="#程序视角" class="headerlink" title="程序视角"></a>程序视角</h1><blockquote>
-<p>操作系统上的程序。</p>
-</blockquote>
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="鸡兔同笼问题"><a href="#鸡兔同笼问题" class="headerlink" title="鸡兔同笼问题"></a>鸡兔同笼问题</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-type">bool</span> <span class="hljs-title">inst_fetch</span><span class="hljs-params">(<span class="hljs-type">inst_t</span> *in)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">union</span><br>    &#123;<br>        <span class="hljs-type">inst_t</span> i;<br>        u32 u;<br>    &#125; u;<br>    <span class="hljs-type">int</span> r = <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%x&quot;</span>, &amp;u.u);<br>    *in = u.i;<br>    <span class="hljs-keyword">return</span> r &gt; <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-type">void</span> <span class="hljs-title">ebreak</span><span class="hljs-params">(CPUState *cpu)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">switch</span> (cpu-&gt;x[<span class="hljs-number">10</span>])<br>    &#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>    &#123;<br>        <span class="hljs-built_in">putchar</span>(cpu-&gt;x[<span class="hljs-number">11</span>]);<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, cpu-&gt;x[<span class="hljs-number">11</span>]);<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:<br>    &#123;<br>        cpu-&gt;on = <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">default</span>:<br>        <span class="hljs-built_in">assert</span>(<span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdint.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;assert.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span><br><span class="hljs-keyword">typedef</span> <span class="hljs-type">uint32_t</span> u32;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>    u32 op : <span class="hljs-number">7</span>, rd : <span class="hljs-number">5</span>, f3 : <span class="hljs-number">3</span>, rs1 : <span class="hljs-number">5</span>, rs2 : <span class="hljs-number">5</span>, f7 : <span class="hljs-number">7</span>;<br>&#125; <span class="hljs-type">inst_t</span>;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>    u32 on, x[<span class="hljs-number">32</span>];<br>&#125; CPUState;<br><br><span class="hljs-comment">// Uncore:</span><br><span class="hljs-comment">//   inst_fetch - read an instruction from stdin</span><br><span class="hljs-comment">//   ebreak - hyper call: putchar/putd/exit</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;uncore.c&quot;</span></span><br><br><span class="hljs-type">static</span> <span class="hljs-keyword">inline</span> u32 <span class="hljs-title function_">sext</span><span class="hljs-params">(u32 val, u32 n)</span><br>&#123;<br>    <span class="hljs-comment">// Sign extend n-bit integer val to 32-bit</span><br>    u32 mask = ~((<span class="hljs-number">1</span> &lt;&lt; n) - <span class="hljs-number">1</span>);<br>    u32 <span class="hljs-built_in">set</span> = (val &gt;&gt; n) &amp; <span class="hljs-number">1</span>;<br>    u32 ret = <span class="hljs-built_in">set</span> ? (val | mask) : val;<br>    <span class="hljs-keyword">return</span> ret;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span><br>&#123;<br>    CPUState cpu = &#123;.on = <span class="hljs-number">1</span>, .x = &#123;<span class="hljs-number">0</span>&#125;&#125;; <span class="hljs-comment">// The RESET state</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; argv[i + <span class="hljs-number">1</span>] &amp;&amp; i &lt; <span class="hljs-number">8</span>; i++)<br>    &#123;<br>        cpu.x[<span class="hljs-number">10</span> + i] = atoi(argv[i + <span class="hljs-number">1</span>]); <span class="hljs-comment">// Set a0-a7 to arguments</span><br>    &#125;<br><br>    <span class="hljs-type">inst_t</span> in;<br>    <span class="hljs-comment">// 逐一取出指令并执行</span><br>    <span class="hljs-keyword">while</span> (cpu.on &amp;&amp; inst_fetch(&amp;in))<br>    &#123;<br>        <span class="hljs-comment">// For each fetched instruction, execute it following the RV32I spec</span><br>        u32 op = in.op, f3 = in.f3, f7 = in.f7;<br>        u32 imm = sext((f7 &lt;&lt; <span class="hljs-number">5</span>) | in.rs2, <span class="hljs-number">12</span>), shamt = in.rs2;<br>        u32 rd = in.rd, rs1_u = cpu.x[in.rs1], rs2_u = cpu.x[in.rs2], res = <span class="hljs-number">0</span>;<br><br>        <span class="hljs-comment">// 只需要六条指令，就可以实现鸡兔同笼问题的解法</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __ <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-comment">// Bad syntactic sugar!</span></span><br>        <span class="hljs-keyword">if</span> (op == <span class="hljs-number">0b0110011</span> &amp;&amp; f3 == <span class="hljs-number">0b000</span> &amp;&amp; f7 == <span class="hljs-number">0b0000000</span>)<br>            res = rs1_u + rs2_u;<br>        __(op == <span class="hljs-number">0b0110011</span> &amp;&amp; f3 == <span class="hljs-number">0b000</span> &amp;&amp; f7 == <span class="hljs-number">0b0100000</span>)<br>        res = rs1_u - rs2_u;<br>        __(op == <span class="hljs-number">0b0010011</span> &amp;&amp; f3 == <span class="hljs-number">0b000</span>)<br>        res = rs1_u + imm;<br>        __(op == <span class="hljs-number">0b0010011</span> &amp;&amp; f3 == <span class="hljs-number">0b001</span> &amp;&amp; f7 == <span class="hljs-number">0b0000000</span>)<br>        res = rs1_u &lt;&lt; shamt;<br>        __(op == <span class="hljs-number">0b0010011</span> &amp;&amp; f3 == <span class="hljs-number">0b101</span> &amp;&amp; f7 == <span class="hljs-number">0b0000000</span>)<br>        res = rs1_u &gt;&gt; shamt;<br>        __(op == <span class="hljs-number">0b1110011</span> &amp;&amp; f3 == <span class="hljs-number">0b000</span> &amp;&amp; rd == <span class="hljs-number">0</span> &amp;&amp; imm == <span class="hljs-number">1</span>)<br>        ebreak(&amp;cpu);<br>        <span class="hljs-keyword">else</span> assert(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">if</span> (rd)<br>            cpu.x[rd] = res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<blockquote>
-<p>make run；生成机器指令。</p>
-</blockquote>
+<h3 id="用户与网络服务器的通信方式"><a href="#用户与网络服务器的通信方式" class="headerlink" title="用户与网络服务器的通信方式"></a>用户与网络服务器的通信方式</h3><ul>
+<li>通常用户使用web浏览器与相应服务器进行通信。</li>
+<li>在浏览器中键入“域名” 或 “IP地址：端口号” 。</li>
+</ul>
+<h1 id="预计目标"><a href="#预计目标" class="headerlink" title="预计目标"></a>预计目标</h1><ul>
+<li>「请求-响应」</li>
+<li>压力测试</li>
+</ul>
 
                 
               </div>
@@ -322,7 +310,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Course/" class="category-chain-item">Course</a>
+  <a href="/categories/Project/" class="category-chain-item">Project</a>
   
   
 
@@ -337,7 +325,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Operating-System/">#Operating System</a>
+        <a href="/tags/C/">#C++</a>
+      
+        <a href="/tags/Linux/">#Linux</a>
       
     </div>
   
@@ -349,8 +339,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>NJU Operating System Note 1 Introduction</div>
-      <div>https://ancen.blog/2023/02/22/NJU-Operating-System-Note-1-Introduction/</div>
+      <div>WebServer Note 1 Backgroud</div>
+      <div>https://ancen.blog/2022/07/01/WebServer-Note-2-Thread-Synchronization/</div>
     </div>
     <div class="license-meta">
       
@@ -362,7 +352,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月22日</div>
+          <div>2022年7月1日</div>
         </div>
       
       
@@ -394,9 +384,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/01/HJ-C++-STL-Note-1-STL-Test/" title="HJ C++ STL Note 1 STL Test">
+                      <a href="/2022/07/01/WebServer-Note-1-Backgroud/" title="WebServer Note 1 Backgroud">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">HJ C++ STL Note 1 STL Test</span>
+                        <span class="hidden-mobile">WebServer Note 1 Backgroud</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -404,8 +394,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/" title="UCSB CS291A Note 1 Real-time Shadows">
-                        <span class="hidden-mobile">UCSB CS291A Note 1 Real-time Shadows</span>
+                      <a href="/2022/04/01/UCSB-CS291A-Note-1-PCSS/" title="UCSB CS291A Note 1 PCSS">
+                        <span class="hidden-mobile">UCSB CS291A Note 1 PCSS</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

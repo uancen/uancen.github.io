@@ -29,8 +29,9 @@
 <meta property="og:image" content="https://ancen.blog/2023/03/01/HJ-C++-STL-Note-1-STL-Test/range.png">
 <meta property="og:image" content="https://ancen.blog/2023/03/01/HJ-C++-STL-Note-1-STL-Test/range2.png">
 <meta property="og:image" content="https://ancen.blog/2023/03/01/HJ-C++-STL-Note-1-STL-Test/ite.png">
+<meta property="og:image" content="https://ancen.blog/2023/03/01/HJ-C++-STL-Note-1-STL-Test/container.png">
 <meta property="article:published_time" content="2023-02-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-02T02:05:41.944Z">
+<meta property="article:modified_time" content="2023-03-02T16:03:57.324Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          723 字
+          1.7k 字
         
       </span>
     
@@ -242,7 +243,7 @@
         
         
         
-          7 分钟
+          15 分钟
         
       </span>
     
@@ -311,10 +312,15 @@
 <p>现在这样for range了；auto后的elem其实就是iterator；auto可以自行推导，但是不是万能的，尽量还是明晰变量类型；加上引用，可以更改原元素。</p>
 <p><img src="/2023/03/01/HJ-C++-STL-Note-1-STL-Test/ite.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>auto可以自行推导。</p>
-<h2 id="Containers"><a href="#Containers" class="headerlink" title="Containers"></a>Containers</h2><blockquote>
+<h1 id="Containers"><a href="#Containers" class="headerlink" title="Containers"></a>Containers</h1><blockquote>
 <p>Program = Data Structures + Algorithm.</p>
 </blockquote>
-
+<p><img src="/2023/03/01/HJ-C++-STL-Note-1-STL-Test/container.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>容器大致分为Sequence Container、Associative Container、Unordered Containers（C++ 11新出现）；但不是好分法，Unordered Containers实际上也是Associative Container，底层是HashTable。</p>
+<p>标准库提供的链表实际上是双向链表。</p>
+<p>红黑树，高度平衡二分树；set、map基本都使用红黑树来做；set、map不同只在于key、key-value；multi则代表key可重复。</p>
+<h2 id="测试程序的辅助函数"><a href="#测试程序的辅助函数" class="headerlink" title="测试程序的辅助函数"></a>测试程序的辅助函数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">const</span> <span class="hljs-type">long</span> ASIZE = <span class="hljs-number">500000L</span>;		<span class="hljs-comment">// 数组大小</span><br><br><span class="hljs-comment">// 从console中读入一个 long</span><br><span class="hljs-function"><span class="hljs-type">long</span> <span class="hljs-title">get_a_target_long</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">long</span> target = <span class="hljs-number">0</span>;<br>   <br>    cout &lt;&lt; <span class="hljs-string">&quot;target (0~&quot;</span> &lt;&lt; RAND_MAX &lt;&lt; <span class="hljs-string">&quot;): &quot;</span>;<br>    cin &gt;&gt; target;<br>    <span class="hljs-keyword">return</span> target;<br>&#125;<br><br><span class="hljs-comment">// 从console中读入一个 string </span><br><span class="hljs-function">string <span class="hljs-title">get_a_target_string</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">long</span> target = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">char</span> buf[<span class="hljs-number">10</span>];<br><br>    cout &lt;&lt; <span class="hljs-string">&quot;target (0~&quot;</span> &lt;&lt; RAND_MAX &lt;&lt; <span class="hljs-string">&quot;): &quot;</span>;<br>    cin &gt;&gt; target;<br>    <span class="hljs-built_in">snprintf</span>(buf, <span class="hljs-number">10</span>, <span class="hljs-string">&quot;%d&quot;</span>, target);<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">string</span>(buf);<br>&#125;<br><br><span class="hljs-comment">// 比较 long</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">compareLongs</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *a, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *b)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> (*(<span class="hljs-type">long</span> *) a - *(<span class="hljs-type">long</span> *) b);<br>&#125;<br><br><span class="hljs-comment">// 比较 string</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">compareStrings</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *a, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *b)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (*(string *) a &gt; *(string *) b)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (*(string *) a &lt; *(string *) b)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2>
                 
               </div>
             
@@ -408,8 +414,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/22/NJU-Operating-System-Note-1-Introduction/" title="NJU Operating System Note 1 Introduction">
-                        <span class="hidden-mobile">NJU Operating System Note 1 Introduction</span>
+                      <a href="/2022/07/01/WebServer-Note-1-Backgroud/" title="WebServer Note 1 Backgroud">
+                        <span class="hidden-mobile">WebServer Note 1 Backgroud</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

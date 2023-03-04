@@ -18,28 +18,28 @@
   
     <meta name="description" content="SM本影与半影 精准光源（punctual light source），生成硬阴影（hard shadows）；面光源产生软阴影（soft shadows），阴影 &#x3D; 本影 + 半影。 2-pass Algorithm简而言之，第一次从light看向场景渲染生成深度图，第二次：从camera处看场景（进行渲染），这个过程使用深度图判断物体是否处于阴影中。 1strender from light,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UCSB CS291A Note 1 Real-time Shadows">
-<meta property="og:url" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/index.html">
+<meta property="og:title" content="UCSB CS291A Note 1 PCSS">
+<meta property="og:url" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-PCSS/index.html">
 <meta property="og:site_name" content="Ancenの小屋">
 <meta property="og:description" content="SM本影与半影 精准光源（punctual light source），生成硬阴影（hard shadows）；面光源产生软阴影（soft shadows），阴影 &#x3D; 本影 + 半影。 2-pass Algorithm简而言之，第一次从light看向场景渲染生成深度图，第二次：从camera处看场景（进行渲染），这个过程使用深度图判断物体是否处于阴影中。 1strender from light,">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/shadowsintro.png">
-<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/visual.png">
-<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/selfocclusion1.png">
-<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/selfocclusion2.png">
-<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/soft.png">
-<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/blockerdistance.png">
-<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/blockerrange.png">
+<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-PCSS/shadowsintro.png">
+<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-PCSS/visual.png">
+<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-PCSS/selfocclusion1.png">
+<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-PCSS/selfocclusion2.png">
+<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-PCSS/soft.png">
+<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-PCSS/blockerdistance.png">
+<meta property="og:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-PCSS/blockerrange.png">
 <meta property="article:published_time" content="2022-03-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-02T05:16:31.594Z">
+<meta property="article:modified_time" content="2023-03-02T11:29:07.978Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="Graphics">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/shadowsintro.png">
+<meta name="twitter:image" content="https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-PCSS/shadowsintro.png">
   
   
   
-  <title>UCSB CS291A Note 1 Real-time Shadows - Ancenの小屋</title>
+  <title>UCSB CS291A Note 1 PCSS - Ancenの小屋</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -209,7 +209,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="UCSB CS291A Note 1 Real-time Shadows"></span>
+            <span id="subtitle" data-typed-text="UCSB CS291A Note 1 PCSS"></span>
           
         </div>
 
@@ -281,12 +281,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">UCSB CS291A Note 1 Real-time Shadows</h1>
+            <h1 style="display: none">UCSB CS291A Note 1 PCSS</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SM"><a href="#SM" class="headerlink" title="SM"></a>SM</h1><h2 id="本影与半影"><a href="#本影与半影" class="headerlink" title="本影与半影"></a>本影与半影</h2><p><img src="/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/shadowsintro.png" srcset="/img/loading.gif" lazyload alt></p>
+                <h1 id="SM"><a href="#SM" class="headerlink" title="SM"></a>SM</h1><h2 id="本影与半影"><a href="#本影与半影" class="headerlink" title="本影与半影"></a>本影与半影</h2><p><img src="/2022/04/01/UCSB-CS291A-Note-1-PCSS/shadowsintro.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>精准光源（punctual light source），生成硬阴影（hard shadows）；面光源产生软阴影（soft shadows），阴影 = 本影 + 半影。</p>
 <h2 id="2-pass-Algorithm"><a href="#2-pass-Algorithm" class="headerlink" title="2-pass Algorithm"></a>2-pass Algorithm</h2><p>简而言之，第一次从light看向场景渲染生成深度图，第二次：从camera处看场景（进行渲染），这个过程使用深度图判断物体是否处于阴影中。</p>
 <h3 id="1st"><a href="#1st" class="headerlink" title="1st"></a>1st</h3><p>render from light, to get the depth texture.</p>
@@ -306,20 +306,20 @@
 <li>position-&gt;NDC[0,1]</li>
 <li>(255.0,255.0,255.0) * position.z</li>
 </ul>
-<p><img src="/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/visual.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2022/04/01/UCSB-CS291A-Note-1-PCSS/visual.png" srcset="/img/loading.gif" lazyload alt></p>
 </blockquote>
 <h2 id="pros-amp-cons"><a href="#pros-amp-cons" class="headerlink" title="pros &amp; cons"></a>pros &amp; cons</h2><h3 id="pros"><a href="#pros" class="headerlink" title="pros"></a>pros</h3><p>快；使用记录的深度图。</p>
 <h3 id="cons"><a href="#cons" class="headerlink" title="cons"></a>cons</h3><p>cons1: self-occlusion/self-shadowing</p>
 <blockquote>
 <p>表现类似于摩尔纹。</p>
 </blockquote>
-<p><img src="/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/selfocclusion1.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2022/04/01/UCSB-CS291A-Note-1-PCSS/selfocclusion1.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>在SM下，场景是离散的小片；会导致这样一种现象：从camera看向场景的小片时，该小片连向light，会被误认为被前面的小片遮挡，产生错误的阴影；容易知道，light incident从上向下，问题最小，light incident接近和地面平行时（grazing angle），self-occlusion最严重。</p>
 <p>解决方法：使记录深度明显得比实际深度小；具体方法：使一个点深度大于记录深度的值超过一个阈值时，才认为这个点在阴影内；Adding a variable bias (slope scale based depth bias)。</p>
 <blockquote>
 <p>但是bias会引入detached shadow issue，表现为阴影偏移（Peter Panning）。</p>
 </blockquote>
-<p><img src="/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/selfocclusion2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2022/04/01/UCSB-CS291A-Note-1-PCSS/selfocclusion2.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>使bias与接收器对光的角度成比例（normal incident影响小而horizontal incident影响大）；slope scale based depth bias = factorSlope * slope + constantBias；slope: determined by the normal。</p>
 <blockquote>
 <p>RTR does not trust in COMPLEXITY.</p>
@@ -346,7 +346,7 @@
 <h1 id="PCF"><a href="#PCF" class="headerlink" title="PCF"></a>PCF</h1><h2 id="软阴影"><a href="#软阴影" class="headerlink" title="软阴影"></a>软阴影</h2><blockquote>
 <p>SM只给出硬阴影。</p>
 </blockquote>
-<p><img src="/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/soft.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2022/04/01/UCSB-CS291A-Note-1-PCSS/soft.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>半影区域上看向面光源，部分遮挡，部分未遮挡。</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>percentage closer filter，其实起初是对阴影边界反走样（抗锯齿）的方法，后买你发现可以用在软阴影的实现上。具体实现：filtering（其实这里只是求了个平均） the results of shadow comparisons。</p>
 <blockquote>
@@ -359,7 +359,7 @@
 <h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>对范围内的像素分别进行深度值比较，对比较的结果（01值）进行加权平均（这时候不再是非0即1的了）。</p>
 <p>PCF filter size，small→sharper，large→softer；而软阴影实际上就是对硬阴影做大的filter；在不同的位置将硬阴影转化为软阴影，且不同位置不同filter_size，和遮挡物距离（blocker distance）相关。</p>
 <h1 id="PCSS"><a href="#PCSS" class="headerlink" title="PCSS"></a>PCSS</h1><h2 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h2><p>Percentage Closer Soft Shadows，Filter size应该和blocker distance相关；blocker distance: relative average projected blocker depth。</p>
-<p><img src="/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/blockerdistance.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2022/04/01/UCSB-CS291A-Note-1-PCSS/blockerdistance.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>W_Penumbra代表“软”的程度，部分由光源决定。当遮挡物靠近接受物（平面），容易想到，“软”的范围也会变小。</p>
 <p>数学形式如下，一个简单的相似三角形。</p>
 <p>$w_{\text {Penumbra }}=\left(d_{\text {Receiver }}-d_{\text {Blocken }}\right) \cdot w_{\text {Light }} / d_{\text {Blocker }}$</p>
@@ -385,7 +385,7 @@
 </blockquote>
 <h3 id="遮挡物查询的范围"><a href="#遮挡物查询的范围" class="headerlink" title="遮挡物查询的范围"></a>遮挡物查询的范围</h3><p>如何确定一个大概的范围判断是否是Blocker呢？</p>
 <p>即确认“取shadow map上这个像素周围的一些像素，找出能够挡住shading point的点的像素”这一步的寻找范围大小。两种方法，取固定大小范围；heuristics: depends on the light size and receiver’s distance from the light。</p>
-<p><img src="/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/blockerrange.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="/2022/04/01/UCSB-CS291A-Note-1-PCSS/blockerrange.png" srcset="/img/loading.gif" lazyload alt></p>
 <blockquote>
 <p>认为SM放在近平面上。</p>
 </blockquote>
@@ -451,8 +451,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>UCSB CS291A Note 1 Real-time Shadows</div>
-      <div>https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-Real-time-Shadows/</div>
+      <div>UCSB CS291A Note 1 PCSS</div>
+      <div>https://ancen.blog/2022/04/01/UCSB-CS291A-Note-1-PCSS/</div>
     </div>
     <div class="license-meta">
       
@@ -496,9 +496,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/22/NJU-Operating-System-Note-1-Introduction/" title="NJU Operating System Note 1 Introduction">
+                      <a href="/2022/07/01/WebServer-Note-2-Thread-Synchronization/" title="WebServer Note 1 Backgroud">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">NJU Operating System Note 1 Introduction</span>
+                        <span class="hidden-mobile">WebServer Note 1 Backgroud</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
