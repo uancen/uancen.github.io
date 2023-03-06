@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/spec2.png">
 <meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/pspec.png">
 <meta property="article:published_time" content="2023-03-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-06T03:12:39.811Z">
+<meta property="article:modified_time" content="2023-03-06T04:35:49.039Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
@@ -324,7 +324,7 @@
 </blockquote>
 <h2 id="Partial-Specialization"><a href="#Partial-Specialization" class="headerlink" title="Partial Specialization"></a>Partial Specialization</h2><p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/pspec.png" srcset="/img/loading.gif" lazyload alt></p>
 <p>左边，两个模板参数，绑定了一个模板参数；指定接受参数为bool，有特化实现，bool容易想到是更精简的空间。</p>
-<p>右边范围偏特化，泛化接收任意type，而如果绑定的是指针，则有偏特化实现，而如果绑定的是const pointer，也有偏特化实现。</p>
+<p>右边，范围偏特化，泛化接收任意type，而如果绑定的是指针，则有偏特化实现，如果绑定的是const pointer，也有偏特化实现。</p>
 
                 
               </div>
