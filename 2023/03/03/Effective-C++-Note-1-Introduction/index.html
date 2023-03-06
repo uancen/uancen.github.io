@@ -16,34 +16,22 @@
   <meta name="author" content="Ancen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="OOP &amp; GPObject-Oriented Programming和Generic Programming是STL容器设计中使用的两种设计模式。  OOP的目的是将数据和方法绑定在一起，例如对list容器进行排序使用list的sort方法，sort已经放在list里了。  GP的目的是将数据和方法分离开来，例如对vector容器进行排序使用std::sort方法，sort被设计在Alg">
+    <meta name="description" content="Guidance Use C++ effectively. Make software comprehensible, maintainable, portable, extensible, efficient, and likely to behave as you expect.   general design strategies; the nuts and bolts of specif">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HJ C++ STL Note 2 STL Design Patterns">
-<meta property="og:url" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/index.html">
+<meta property="og:title" content="Effective C++ Note 1 Introduction">
+<meta property="og:url" content="https://ancen.blog/2023/03/03/Effective-C++-Note-1-Introduction/index.html">
 <meta property="og:site_name" content="Ancenの小屋">
-<meta property="og:description" content="OOP &amp; GPObject-Oriented Programming和Generic Programming是STL容器设计中使用的两种设计模式。  OOP的目的是将数据和方法绑定在一起，例如对list容器进行排序使用list的sort方法，sort已经放在list里了。  GP的目的是将数据和方法分离开来，例如对vector容器进行排序使用std::sort方法，sort被设计在Alg">
+<meta property="og:description" content="Guidance Use C++ effectively. Make software comprehensible, maintainable, portable, extensible, efficient, and likely to behave as you expect.   general design strategies; the nuts and bolts of specif">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/OOP.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/GP.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/min.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/OOP.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/algorithm.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/oo1.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/oo2.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/oo3.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/spec.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/spec2.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/pspec.png">
-<meta property="article:published_time" content="2023-03-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-06T03:12:39.811Z">
+<meta property="article:published_time" content="2023-03-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-06T04:24:08.671Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/OOP.png">
   
   
   
-  <title>HJ C++ STL Note 2 STL Design Patterns - Ancenの小屋</title>
+  <title>Effective C++ Note 1 Introduction - Ancenの小屋</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="HJ C++ STL Note 2 STL Design Patterns"></span>
+            <span id="subtitle" data-typed-text="Effective C++ Note 1 Introduction"></span>
           
         </div>
 
@@ -224,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-06 00:00" pubdate>
-          2023年3月6日 凌晨
+        <time datetime="2023-03-03 00:00" pubdate>
+          2023年3月3日 凌晨
         </time>
       </span>
     
@@ -236,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          961 字
+          3k 字
         
       </span>
     
@@ -247,7 +235,7 @@
         
         
         
-          9 分钟
+          26 分钟
         
       </span>
     
@@ -285,46 +273,68 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">HJ C++ STL Note 2 STL Design Patterns</h1>
+            <h1 style="display: none">Effective C++ Note 1 Introduction</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="OOP-amp-GP"><a href="#OOP-amp-GP" class="headerlink" title="OOP &amp; GP"></a>OOP &amp; GP</h1><p>Object-Oriented Programming和Generic Programming是STL容器设计中使用的两种设计模式。</p>
-<p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/OOP.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>OOP的目的是将<strong>数据</strong>和<strong>方法</strong>绑定在一起，例如对list容器进行排序使用list的sort方法，sort已经放在list里了。</p>
-<p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/GP.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>GP的目的是将<strong>数据</strong>和<strong>方法</strong>分离开来，例如对vector容器进行排序使用std::sort方法，sort被设计在Algorithms里了，则这里全局的设计，使用Iterator得到范围，<code>sort(c.begin(), c.end());</code>。</p>
-<blockquote>
-<p>标准库没有太涉及OOP，没有复杂的继承关系。</p>
+                <h1 id="Guidance"><a href="#Guidance" class="headerlink" title="Guidance"></a>Guidance</h1><blockquote>
+<p>Use C++ effectively.</p>
+<p>Make software comprehensible, maintainable, portable, extensible, efficient, and likely to behave as you expect.</p>
 </blockquote>
-<p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/min.png" srcset="/img/loading.gif" lazyload alt="image-20230306094342814"></p>
-<p>举例，min和max，闭门造车，&lt;的事情，min并不关心，而由T自己决定（操作符重载）。</p>
-<p><strong>Q：list为什么不能使用全局设计？</strong></p>
-<p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/OOP.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>全局sort调用的_introsort_loop，其中迭代器进行了+-/，传进来的迭代器必须是Random的，而List的迭代器是不能跳来跳去的，只能++，所以List不能使用全局设计。 </p>
-<p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/algorithm.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>max有两个版本，对于第一个版本，字符串有字典形式的比大小，string的比大小使用该默认版本；第二个版本，其中第三个参数接收一个Compare，在这里自定义比大小的方式，比的是size。</p>
-<h1 id="运算符重载-amp-模板特化"><a href="#运算符重载-amp-模板特化" class="headerlink" title="运算符重载 &amp; 模板特化"></a>运算符重载 &amp; 模板特化</h1><h2 id="Operator-Overloading"><a href="#Operator-Overloading" class="headerlink" title="Operator Overloading"></a>Operator Overloading</h2><p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/oo1.png" srcset="/img/loading.gif" lazyload alt></p>
-<p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/oo2.png" srcset="/img/loading.gif" lazyload alt></p>
-<p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/oo3.png" srcset="/img/loading.gif" lazyload alt="image-20230306102017986"></p>
-<p>一定会重载对指针定义的所有动作，以上列出来了4个，但仍有很多。</p>
-<h2 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h2><ul>
-<li>类模板</li>
-<li>函数模板</li>
-<li>成员模板</li>
+<ul>
+<li>general design strategies;</li>
+<li>the nuts and bolts of specific language features.</li>
 </ul>
-<h2 id="Specialization"><a href="#Specialization" class="headerlink" title="Specialization"></a>Specialization</h2><p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/spec.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>设计类模板，有一个泛化版本了；但对于独特type，有一个更好的处理方法，则可以使用Specialization。</p>
-<p>以上例子仅仅用来演示Specialization语法；分别指定int和double时的特定语法；template后面的&lt;&gt;变为空。</p>
-<p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/spec2.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>_STL_TEMPLATE_NULL实际上就是template&lt;&gt;，hash这个类模板在以下传入类型时，特化。</p>
 <blockquote>
-<p>以上是全特化Full。</p>
+<p>Only features in the official language standard.</p>
 </blockquote>
-<h2 id="Partial-Specialization"><a href="#Partial-Specialization" class="headerlink" title="Partial Specialization"></a>Partial Specialization</h2><p><img src="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/pspec.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>左边，两个模板参数，绑定了一个模板参数；指定接受参数为bool，有特化实现，bool容易想到是更精简的空间。</p>
-<p>右边范围偏特化，泛化接收任意type，而如果绑定的是指针，则有偏特化实现，而如果绑定的是const pointer，也有偏特化实现。</p>
+<p><strong>None of the Items is universally applicable.</strong></p>
+<h1 id="Terminology"><a href="#Terminology" class="headerlink" title="Terminology"></a>Terminology</h1><h2 id="declaration"><a href="#declaration" class="headerlink" title="declaration"></a>declaration</h2><p>A <strong>declaration</strong> tells compilers about the name and type of something, but it omits certain details.</p>
+<ul>
+<li>object declaration</li>
+<li>function declaration</li>
+<li>class declaration</li>
+<li>template declaration</li>
+</ul>
+<blockquote>
+<p>size_t, is just a typedef for some unsigned type that C++ uses when counting things.</p>
+</blockquote>
+<h2 id="signature"><a href="#signature" class="headerlink" title="signature"></a>signature</h2><p>Each function’s declaration reveals its signature, i.e., its parameter and return types.</p>
+<h2 id="definition"><a href="#definition" class="headerlink" title="definition"></a>definition</h2><p>A <strong>definition</strong> provides compilers with the details a declaration omits.</p>
+<ul>
+<li>object definition, set aside memory for the object;</li>
+<li>function or a function template definition, code body;</li>
+<li>template definition, list the members of the class or template.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">GraphNode</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">GraphNode</span>();<br>    ~<span class="hljs-built_in">GraphNode</span>();<br>    ...<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h2 id="initialization"><a href="#initialization" class="headerlink" title="initialization"></a>initialization</h2><p><strong>Initialization</strong> is the process of giving an object its first value.For objects generated from structs and classes, initialization is performed by constructors.</p>
+<p>Explicit, prevents constructors from being used to perform implicit type conversions.</p>
+<blockquote>
+<p>只要没有特殊理由implicit类型转换，就explicit。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> &#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">B</span><span class="hljs-params">(<span class="hljs-type">int</span> x = <span class="hljs-number">0</span>, <span class="hljs-type">bool</span> b = <span class="hljs-literal">true</span>)</span></span>;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">doSomething</span><span class="hljs-params">(B b)</span></span>;<br><span class="hljs-comment">// fine, uses the B constructor to explicitly convert the int to a B for this call.</span><br><span class="hljs-built_in">doSomething</span>(<span class="hljs-built_in">B</span>(<span class="hljs-number">28</span>));<br><span class="hljs-comment">// error! doSomething takes a B not an int,</span><br><span class="hljs-comment">// and there is no implicit conversion from int to B</span><br><span class="hljs-built_in">doSomething</span>(<span class="hljs-number">28</span>);<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>Constructors declared explicit are usually preferable to non-explicit ones, because they prevent compilers from performing unexpected (often unintended) type conversions.</p>
+</blockquote>
+<h2 id="copy-constructor-amp-copy-assignment-operator"><a href="#copy-constructor-amp-copy-assignment-operator" class="headerlink" title="copy constructor &amp; copy assignment operator"></a>copy constructor &amp; copy assignment operator</h2><p>The <strong>copy constructor</strong> is used to initialize an object with a different object of the same type, and the <strong>copy assignment operator</strong> is used to copy the value from one object to another of the same type:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Widget w1; <span class="hljs-comment">// invoke default constructor</span><br><span class="hljs-function">Widget <span class="hljs-title">w2</span><span class="hljs-params">(w1)</span></span>; <span class="hljs-comment">// invoke copy constructor</span><br>Widget w3 = w2; <span class="hljs-comment">// invoke copy constructor</span><br>w1 = w2; <span class="hljs-comment">// invoke copy assignment operator</span><br></code></pre></td></tr></table></figure>
+<p>新对象，肯定是构造；没有新对象，是赋值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">hasAcceptableQuality</span><span class="hljs-params">(Widget w)</span></span>;<br>...<br>Widget aWidget;<br><span class="hljs-keyword">if</span> (<span class="hljs-built_in">hasAcceptableQuality</span>(aWidget)) ...<br></code></pre></td></tr></table></figure>
+<p>The parameter w is passed to hasAcceptableQuality by value, so in the call above, aWidget is copied into w. The copying is done by Widget’s copy constructor.</p>
+<p>拷贝构造<strong>定义参数值如何传递到新对象</strong>，这个操作在拷贝构造中完成。Pass-by-value means “call the copy constructor.”，事实上，pass-by-value不是一个好选择，pass-by-reference-to-const会更好。</p>
+<h2 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h2><p>The <strong>STL</strong> is the Standard Template Library, the part of C++’s standard library.</p>
+<blockquote>
+<p>六大组件详情见 HJ C++。</p>
+</blockquote>
+<p>Much of that related functionality has to do with <strong>function objects</strong>: objects that act like functions. Such objects come from classes that overload operator(), the function call operator.</p>
+<h2 id="undefined-behavior"><a href="#undefined-behavior" class="headerlink" title="undefined behavior"></a>undefined behavior</h2><p>Programmers coming to C++ from languages like Java or C# may be surprised at the notion of <strong>undefined behavior</strong>.</p>
+<p>It’s true: a program with undefined behavior could erase your hard drive. But it’s not probable. More likely is that the program will behave erratically, sometimes running normally, other times crashing, still other times producing incorrect results.</p>
+<h2 id="interface"><a href="#interface" class="headerlink" title="interface"></a>interface</h2><p>C++并没有接口的概念，但可以实现类似的效果；常常谈到的interface更类似于design idea。</p>
+<h2 id="client"><a href="#client" class="headerlink" title="client"></a>client</h2><p>code user.</p>
+<blockquote>
+<p>希望去make things easy for clients；在软件开发领域同理，对于函数、类、template、interface，都希望easy。</p>
+</blockquote>
 
                 
               </div>
@@ -343,7 +353,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Course/" class="category-chain-item">Course</a>
+  <a href="/categories/Note/" class="category-chain-item">Note</a>
   
   
 
@@ -370,8 +380,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>HJ C++ STL Note 2 STL Design Patterns</div>
-      <div>https://ancen.blog/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/</div>
+      <div>Effective C++ Note 1 Introduction</div>
+      <div>https://ancen.blog/2023/03/03/Effective-C++-Note-1-Introduction/</div>
     </div>
     <div class="license-meta">
       
@@ -383,7 +393,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月6日</div>
+          <div>2023年3月3日</div>
         </div>
       
       
@@ -415,12 +425,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/" title="HJ C++ STL Note 2 STL Design Patterns">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HJ C++ STL Note 2 STL Design Patterns</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/03/Effective-C++-Note-1-Introduction/" title="Effective C++ Note 1 Introduction">
-                        <span class="hidden-mobile">Effective C++ Note 1 Introduction</span>
+                      <a href="/2023/03/01/HJ-C++-STL-Note-1-STL-Test/" title="HJ C++ STL Note 1 STL Test">
+                        <span class="hidden-mobile">HJ C++ STL Note 1 STL Test</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
