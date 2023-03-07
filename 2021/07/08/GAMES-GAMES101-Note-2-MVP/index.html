@@ -23,11 +23,21 @@
 <meta property="og:site_name" content="Ancenの小屋">
 <meta property="og:description" content="MVP MVP的理解。  Model transformation (placing objects)  找个好的地方，把所有人集合在一起，摆个pose！（把模型、场景搭好） View transformation (placing camera)  找一个好的角度&#x2F;位置，把相机放好，往某一个角度去看。（改变的是相机） Projection transformation  茄子！ View Tra">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ancen.blog/2021/07/08/GAMES-GAMES101-Note-2-MVP/ViewTransformation.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/08/GAMES-GAMES101-Note-2-MVP/pers.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/08/GAMES-GAMES101-Note-2-MVP/orth1.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/08/GAMES-GAMES101-Note-2-MVP/orth2.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/08/GAMES-GAMES101-Note-2-MVP/pers1.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/08/GAMES-GAMES101-Note-2-MVP/pers2.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/08/GAMES-GAMES101-Note-2-MVP/pers3.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/08/GAMES-GAMES101-Note-2-MVP/vw1.png">
+<meta property="og:image" content="https://ancen.blog/2021/07/08/GAMES-GAMES101-Note-2-MVP/vw2.png">
 <meta property="article:published_time" content="2021-07-07T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-07T01:21:45.919Z">
+<meta property="article:modified_time" content="2023-03-07T09:27:48.880Z">
 <meta property="article:author" content="Ancen">
 <meta property="article:tag" content="Graphics">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ancen.blog/2021/07/08/GAMES-GAMES101-Note-2-MVP/ViewTransformation.png">
   
   
   
@@ -224,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          320 字
+          4.3k 字
         
       </span>
     
@@ -235,7 +245,7 @@
         
         
         
-          3 分钟
+          36 分钟
         
       </span>
     
@@ -288,18 +298,126 @@
 <p>Projection transformation </p>
 <p>茄子！</p>
 <h1 id="View-Transformation"><a href="#View-Transformation" class="headerlink" title="View Transformation"></a>View Transformation</h1><h2 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h2><p>放置相机，使更容易进行投影。</p>
-<h2 id="How"><a href="#How" class="headerlink" title="How"></a>How</h2><ol>
-<li><p>define the camera</p>
+<h2 id="How"><a href="#How" class="headerlink" title="How"></a>How</h2><p>Define the camera</p>
 <ul>
 <li>Position</li>
 <li>LookAt / graze direction</li>
 <li>Up direction</li>
 </ul>
+<p>将相机永远放在默认位置，约定为原点，向着负z，向上为y；简化操作，但也带来了一定问题。</p>
+<blockquote>
+<p>同时也要记得，objects一定要和相机做同样运动。</p>
+</blockquote>
+<p>容易知道，将相机放到默认位置对应位置的操作，对应如下数学。</p>
+<ul>
+<li><p>Translate e to origin</p>
 </li>
-<li><p>transform the camera by the view matrix</p>
+<li><p>Rotates g to -Z</p>
 </li>
-<li>as well as all the objects</li>
-</ol>
+<li>Rotates t yo Y</li>
+<li>So (g×t) to X</li>
+</ul>
+<p><img src="/2021/07/08/GAMES-GAMES101-Note-2-MVP/ViewTransformation.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>$M_{\text {view }}=R_{\text {view }} T_{\text {view }}$</p>
+<p>平移到原点</p>
+<p>$T_{v i c w}=\left[\begin{array}{cccc}1 &amp; 0 &amp; 0 &amp; -x_e \\ 0 &amp; 1 &amp; 0 &amp; -y_e \\ 0 &amp; 0 &amp; 1 &amp; -z_e \\ 0 &amp; 0 &amp; 0 &amp; 1\end{array}\right]$</p>
+<p>三个轴的旋转；正难则反</p>
+<p>$R_{\text {view }}^{-1}=\left[\begin{array}{cccc}x_{\hat{g} \times \hat{t}} &amp; x_t &amp; x_{-g} &amp; 0 \\ y_{\hat{g} \times \hat{t}} &amp; y_t &amp; y_{-g} &amp; 0 \\ z_{\hat{g} \times \hat{t}} &amp; z_t &amp; z_{-g} &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1\end{array}\right]$ </p>
+<p>$R_{\text {view }}=\left[\begin{array}{cccc}x_{\hat{g} \times \hat{t}} &amp; y_{\hat{g} \times \hat{t}} &amp; z_{\hat{g} \times \hat{t}} &amp; 0 \\ x_t &amp; y_t &amp; z_t &amp; 0 \\ x_{-g} &amp; y_{-g} &amp; z_{-g} &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1\end{array}\right]$</p>
+<blockquote>
+<p>正交矩阵（旋转矩阵）的逆就是其转置。</p>
+<p>模型变换和视图变换经常被一起叫作模型视图变换，Also know as ModelView Translation。</p>
+</blockquote>
+<h1 id="Projection-Transformation"><a href="#Projection-Transformation" class="headerlink" title="Projection Transformation"></a>Projection Transformation</h1><p>3D→2D</p>
+<ul>
+<li>Orthographic</li>
+<li>Perspective</li>
+</ul>
+<p><img src="/2021/07/08/GAMES-GAMES101-Note-2-MVP/pers.png" srcset="/img/loading.gif" lazyload alt></p>
+<h2 id="Orthographic"><a href="#Orthographic" class="headerlink" title="Orthographic"></a>Orthographic</h2><p>一个简答的理解</p>
+<ul>
+<li>Camera located at origin, looking at -Z, up at Y (looks familiar?)</li>
+<li>Drop Z coordinate</li>
+<li>Translate and scale the resulting rectangle to [-1, 1]^2</li>
+</ul>
+<p><img src="/2021/07/08/GAMES-GAMES101-Note-2-MVP/orth1.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>也就是将空间里的任意几何体，映射到“标准立方体”；把z坐标扔掉即可得到，但并不方便，还有正式做法。</p>
+<blockquote>
+<p>如果区分物体前后？后面会说。</p>
+</blockquote>
+<p><img src="/2021/07/08/GAMES-GAMES101-Note-2-MVP/orth2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>只需要六个数就可以映射到NDC空间中，先平移再缩放；map a cuboid [l, r] x [b, t] x <strong>[f, n]</strong> to the “canonical” cube [-1, 1]^3。</p>
+<blockquote>
+<p>一个小的注意点，实际上屏幕向里向着负Z轴，所以反而是远的z值小，近大。</p>
+<p>OpenGL投影后的坐标系是左手的，屏幕向里向着正Z轴。（left hand coords）</p>
+</blockquote>
+<p>容易知道，先平移再缩放即可。</p>
+<p>$M_{\text {ortho }}=\left[\begin{array}{cccc}\frac{2}{r-l} &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; \frac{2}{t-b} &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; \frac{2}{n-f} &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1\end{array}\right]\left[\begin{array}{cccc}1 &amp; 0 &amp; 0 &amp; -\frac{r+l}{2} \\ 0 &amp; 1 &amp; 0 &amp; -\frac{t+b}{2} \\ 0 &amp; 0 &amp; 1 &amp; -\frac{n+f}{2} \\ 0 &amp; 0 &amp; 0 &amp; 1\end{array}\right]$</p>
+<h2 id="Perspective"><a href="#Perspective" class="headerlink" title="Perspective"></a>Perspective</h2><h3 id="What"><a href="#What" class="headerlink" title="What"></a>What</h3><p>近大远小；Parallel lines not parallel; converge to single point。</p>
+<p><img src="/2021/07/08/GAMES-GAMES101-Note-2-MVP/pers1.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="How-1"><a href="#How-1" class="headerlink" title="How"></a>How</h3><p>一个感性认知，First “squish” the frustum into a cuboid, then do orthographic projection.</p>
+<p><img src="/2021/07/08/GAMES-GAMES101-Note-2-MVP/pers2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>挤压过程，近平面不变；而对于远平面的z值不变，远平面的中心不变。</p>
+<p>Recall the key idea: find the relationship between transformed points (x’, y’, z’) and the original points (x, y, z).</p>
+<p>首先y之间肯定会有对应关系，看远平面边的例子。</p>
+<p><img src="/2021/07/08/GAMES-GAMES101-Note-2-MVP/pers3.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>x同理。</p>
+<p>$y^{\prime}=\frac{n}{z} y \quad x^{\prime}=\frac{n}{z} x$</p>
+<p>在齐次坐标下，虽然z的变化尚且不确定，有变换。</p>
+<p>$\left(\begin{array}{l}x \\ y \\ z \\ 1\end{array}\right) \Rightarrow\left(\begin{array}{c}n x / z \\ n y / z \\ \text { unknown } \\ 1\end{array}\right)==\left(\begin{array}{c}n x \\ n y \\ \text { still unknown } \\ z\end{array}\right)$</p>
+<p>对于结果项所有项同时×z，则经过向量得到右边最终的向量。</p>
+<p>于是对于以下变换式子</p>
+<p>$M_{\text {persp } \rightarrow \text { ortho }}^{(4 \times 4)}\left(\begin{array}{l}x \\ y \\ z \\ 1\end{array}\right)=\left(\begin{array}{c}n x \\ n y \\ \text { unknown } \\ z\end{array}\right)$</p>
+<p>足够得到一部分变换矩阵。</p>
+<p>$M_{\text {persp } \rightarrow \text { ortho }}=\left(\begin{array}{cccc}n &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; n &amp; 0 &amp; 0 \\ ? &amp; ? &amp; ? &amp; ? \\ 0 &amp; 0 &amp; 1 &amp; 0\end{array}\right)$</p>
+<p>对于剩下的第三行，已经知道有近平面的点不会发生变化，远平面的点的z不会发生变化。</p>
+<p>对于近平面，凑出来nxny等同于变换式子最终项的格式。</p>
+<p>$\left(\begin{array}{l}x \\ y \\ n \\ 1\end{array}\right) \Rightarrow\left(\begin{array}{l}x \\ y \\ n \\ 1\end{array}\right)==\left(\begin{array}{l}n x \\ n y \\ n^2 \\ n\end{array}\right)$</p>
+<p>所以第三行必须是如下格式。</p>
+<p>$\left(\begin{array}{llll}0 &amp; 0 &amp; A &amp; B\end{array}\right)\left(\begin{array}{l}x \\ y \\ n \\ 1\end{array}\right)=n^2$</p>
+<p>对于AB得到</p>
+<p>$A n+B=n^2$</p>
+<p>又对于远平面，只取远平面中心，其位置没有发生变化。</p>
+<p>$\left(\begin{array}{l}0 \\ 0 \\ f \\ 1\end{array}\right) \Rightarrow\left(\begin{array}{l}0 \\ 0 \\ f \\ 1\end{array}\right)==\left(\begin{array}{c}0 \\ 0 \\ f^2 \\ f\end{array}\right)$</p>
+<p>对于AB得到</p>
+<p>$A f+B=f^2$</p>
+<p>于是有</p>
+<p>$\begin{aligned} &amp; A=n+f \\ &amp; B=-n f\end{aligned}$</p>
+<p>得到变换矩阵，最后做正交投影即可，$M_{\text {persp }}=M_{\text {ortho }} M_{\text {persp } \rightarrow \text { ortho }}$。</p>
+<h1 id="Viewport-Transformation"><a href="#Viewport-Transformation" class="headerlink" title="Viewport Transformation"></a>Viewport Transformation</h1><blockquote>
+<p>定义frustum，只需要定义fovY（垂直可视视角）和ratio（宽高比），就可以导出lrbt。</p>
+</blockquote>
+<p><img src="/2021/07/08/GAMES-GAMES101-Note-2-MVP/vw1.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>转换到lrbt。</p>
+<p><img src="/2021/07/08/GAMES-GAMES101-Note-2-MVP/vw2.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>MVP后，Canonical Cube to Screen，先不管z，也就是[-1,1]^2 to [0, width] x [0, height]。</p>
+<p>$M_{\text {viewport }}=\left(\begin{array}{cclc}\frac{\text { width }}{2} &amp; 0 &amp; 0 &amp; \frac{\text { width }}{2} \\ 0 &amp; \frac{\text { height }}{2} &amp; 0 &amp; \frac{\text { height }}{2} \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1\end{array}\right)$</p>
+<blockquote>
+<p>定义Screen</p>
+<ul>
+<li><p>二维数组</p>
+</li>
+<li><p>数组中每个元素代表像素</p>
+</li>
+</ul>
+<blockquote>
+<p>屏幕实际上是光栅成像设备。</p>
+</blockquote>
+<p>像素</p>
+<ul>
+<li>For now: a little square with uniform color</li>
+<li>Color is a mixtrue of (red, green, blue)</li>
+</ul>
+<p>屏幕空间</p>
+<p>认为屏幕左下角是原点，向右是x，向上是y。</p>
+<p>一些约定：</p>
+<ul>
+<li>Pixel’s indices (x, y)；x和y都是整数</li>
+<li>所有像素表示，(0, 0) to (width-1, height-1)</li>
+<li>像素中心，(x+0.5, y+0.5)</li>
+<li>整个屏幕覆盖，(0, 0) to (width, height)</li>
+</ul>
+</blockquote>
 
                 
               </div>
