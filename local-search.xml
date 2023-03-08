@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>HJ C++ STL Note 3 Allocator</title>
+    <link href="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/"/>
+    <url>/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/</url>
+    
+    <content type="html"><![CDATA[<h1 id="OOP-amp-GP"><a href="#OOP-amp-GP" class="headerlink" title="OOP &amp; GP"></a>OOP &amp; GP</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>Course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++ primer Note Allocator</title>
+    <link href="/2023/03/08/C++-primer-Note-Allocator/"/>
+    <url>/2023/03/08/C++-primer-Note-Allocator/</url>
+    
+    <content type="html"><![CDATA[<h1 id="allocator类"><a href="#allocator类" class="headerlink" title="allocator类"></a>allocator类</h1><blockquote><p>将内存分配和对象构造组合在一起，即new，可能会导致不必要的浪费。例如，创建了永远也用不到的对象。</p></blockquote><p><img src="/2023/03/08/C++-primer-Note-Allocator/alloc.png" alt></p><p>allocator帮助将内存分配和对象构造分离。allocator分配的内存是原始的、未构造的。</p><p>allocator根据指定的类型，确定恰当的内存大小和对齐位置。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">allocator&lt;string&gt; alloc;<br><span class="hljs-keyword">auto</span> <span class="hljs-type">const</span> p = alloc.<span class="hljs-built_in">allocate</span>(n);<br></code></pre></td></tr></table></figure><h1 id="allocator分配未构造的内存"><a href="#allocator分配未构造的内存" class="headerlink" title="allocator分配未构造的内存"></a>allocator分配未构造的内存</h1><p>allocator分配的内存是unconstructed，需要在此内存中构造新对象。</p><p>第一个参数给定位置，额外参数用来初始化构造的对象。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">auto</span> q = p; <span class="hljs-comment">// q指向最后的元素构造之后的位置</span><br>alloc.<span class="hljs-built_in">construct</span>(q++);<br>alloc.<span class="hljs-built_in">construct</span>(q++, <span class="hljs-number">10</span>, <span class="hljs-string">&#x27;c&#x27;</span>);<br>alloc.<span class="hljs-built_in">construct</span>(q++, <span class="hljs-string">&quot;c&quot;</span>);<br></code></pre></td></tr></table></figure><blockquote><p>未构造下，不允许使用原始内存，其行为未定义。</p><p>construct是使用原始内存的必经之路。</p></blockquote><p>使用完，使用destroy销毁对象。</p><blockquote><p>destroy接受指针，自然想到也是析构。</p></blockquote><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">while</span>(q != p) &#123;<br>alloc.<span class="hljs-built_in">destroy</span>(--q);<br>&#125;<br></code></pre></td></tr></table></figure><blockquote><p>只能对construct的元素destroy。</p></blockquote><p>元素销毁后，可以重新使用该部分内存，或者直接归还。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">alloc.<span class="hljs-built_in">deallocate</span>(p, n);<br></code></pre></td></tr></table></figure><p>指针p和数量n都必须和allocate保持一致。</p><h1 id="拷贝和填充未初始化内存的算法"><a href="#拷贝和填充未初始化内存的算法" class="headerlink" title="拷贝和填充未初始化内存的算法"></a>拷贝和填充未初始化内存的算法</h1><p>标准库提供的伴随算法，可以在未初始化内存中创建对象。</p><p><img src="/2023/03/08/C++-primer-Note-Allocator/alloc_algorithm.png" alt></p><p>举例使用，</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// allocate twice as many elements as vi holds</span><br><span class="hljs-keyword">auto</span> p = alloc.<span class="hljs-built_in">allocate</span>(vi.<span class="hljs-built_in">size</span>() * <span class="hljs-number">2</span>);<br><span class="hljs-comment">// construct elements starting at p as copies of elements in vi</span><br><span class="hljs-keyword">auto</span> q = <span class="hljs-built_in">uninitialized_copy</span>(vi.<span class="hljs-built_in">begin</span>(), vi.<span class="hljs-built_in">end</span>(), p);<br><span class="hljs-comment">// initialize the remaining elements to 42</span><br><span class="hljs-built_in">uninitialized_fill_n</span>(q, vi.<span class="hljs-built_in">size</span>(), <span class="hljs-number">42</span>);<br></code></pre></td></tr></table></figure><p>copy的p就代表目标空间；容易知道，p必须指向未构造的内存，且必须足够大。返回（递增后的）目的位置迭代器。fill，在目的位置指针指定位置创建给定数目的对象，并用定值对其进行初始化。</p><h1 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h1><p>重写程序</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp">string *<span class="hljs-type">const</span> p = <span class="hljs-keyword">new</span> string[n];<br>string s;<br>string *q = p;<br><span class="hljs-keyword">while</span>(cin &gt;&gt; s &amp;&amp; q != p + n) &#123;<br>*q++ = s;<br>&#125;<br><span class="hljs-type">const</span> <span class="hljs-type">size_t</span> size = q - p;<br><span class="hljs-keyword">delete</span>[] p;<br></code></pre></td></tr></table></figure><blockquote><p>这就是所谓的创建了永远也用不到的对象。</p></blockquote><p>使用allocate</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp">allocator&lt;string&gt; alloc;<br><span class="hljs-keyword">auto</span> <span class="hljs-type">const</span> p = alloc.<span class="hljs-built_in">allocate</span>(n);<br>string s;<br>string *q = p;<br><span class="hljs-keyword">while</span>(q != p + n &amp;&amp; cin &gt;&gt; s) &#123;<br>alloc.<span class="hljs-built_in">construct</span>(q++, s);<br>&#125;<br><span class="hljs-keyword">while</span>(q != p) &#123;<br>cout &lt;&lt; *--q &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>alloc.<span class="hljs-built_in">destroy</span>(q);<br>&#125;<br>alloc.<span class="hljs-built_in">deallocate</span>(p, n);<br></code></pre></td></tr></table></figure><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><br><span class="hljs-selector-tag">b</span><br>c<br>d<br>e<br>e d c <span class="hljs-selector-tag">b</span> <span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>HJ C++ STL Note 2 STL Design Patterns</title>
     <link href="/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/"/>
     <url>/2023/03/06/HJ-C++-STL-Note-2-STL-Design-Patterns/</url>
