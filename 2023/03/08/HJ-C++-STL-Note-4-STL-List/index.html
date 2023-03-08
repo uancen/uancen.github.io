@@ -16,34 +16,19 @@
   <meta name="author" content="Ancen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="operator new &amp; mallocallocator，幕后英雄，不需要直接使用，但是优劣很重要，影响到容器效率。  new到operator new，再到malloc；malloc属于C runtime Lib；下面再调用不同操作系统的底层API；几乎所有C++平台都是这样。 malloc分配的内存，只有蓝色部分是想要的，malloc会分配更多的，内存管理详细讲。 allocate">
-<meta property="og:type" content="article">
-<meta property="og:title" content="HJ C++ STL Note 3 Allocator">
-<meta property="og:url" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/index.html">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Ancenの小屋">
+<meta property="og:url" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-4-STL-List/index.html">
 <meta property="og:site_name" content="Ancenの小屋">
-<meta property="og:description" content="operator new &amp; mallocallocator，幕后英雄，不需要直接使用，但是优劣很重要，影响到容器效率。  new到operator new，再到malloc；malloc属于C runtime Lib；下面再调用不同操作系统的底层API；几乎所有C++平台都是这样。 malloc分配的内存，只有蓝色部分是想要的，malloc会分配更多的，内存管理详细讲。 allocate">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/new.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc1.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc2.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc3.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc4.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc5.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc6.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc7.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc8.png">
-<meta property="og:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc9.png">
-<meta property="article:published_time" content="2023-03-07T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-08T08:17:54.999Z">
+<meta property="article:published_time" content="2023-03-08T12:38:32.541Z">
+<meta property="article:modified_time" content="2023-03-08T12:39:26.009Z">
 <meta property="article:author" content="Ancen">
-<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/new.png">
   
   
   
-  <title>HJ C++ STL Note 3 Allocator - Ancenの小屋</title>
+  <title>Ancenの小屋</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="HJ C++ STL Note 3 Allocator"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -224,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-08 00:00" pubdate>
-          2023年3月8日 凌晨
+        <time datetime="2023-03-08 20:38" pubdate>
+          2023年3月8日 晚上
         </time>
       </span>
     
@@ -236,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          0 字
         
       </span>
     
@@ -247,7 +232,7 @@
         
         
         
-          11 分钟
+          1 分钟
         
       </span>
     
@@ -285,59 +270,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">HJ C++ STL Note 3 Allocator</h1>
+            <h1 style="display: none"></h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="operator-new-amp-malloc"><a href="#operator-new-amp-malloc" class="headerlink" title="operator new &amp; malloc"></a>operator new &amp; malloc</h1><p>allocator，幕后英雄，不需要直接使用，但是优劣很重要，影响到容器效率。</p>
-<p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/new.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>new到operator new，再到malloc；malloc属于C runtime Lib；下面再调用不同操作系统的底层API；几乎所有C++平台都是这样。</p>
-<p>malloc分配的内存，只有蓝色部分是想要的，malloc会分配更多的，<strong>内存管理</strong>详细讲。</p>
-<h1 id="allocate"><a href="#allocate" class="headerlink" title="allocate"></a>allocate</h1><p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc1.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>分配器对malloc的使用，VC6下；默认使用的是紫色，是一个模板。</p>
-<p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc2.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>VC下，allocate其实就是operator new；deallocate其实就是operator delete。</p>
-<blockquote>
-<p>如上所示，没有<strong>特殊设计</strong>。</p>
-<p>也因此，如果像之前alloc放100万元素，每个元素附加内容很多，整个看，甚至比100万元素本身大。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> *p = <span class="hljs-built_in">allocator</span>&lt;<span class="hljs-type">int</span>&gt;().<span class="hljs-built_in">allocate</span>(<span class="hljs-number">512</span>, (<span class="hljs-type">int</span>*)<span class="hljs-number">0</span>);<br><span class="hljs-comment">// 必须要记住要的内存多大，但是实际上没人记得</span><br><span class="hljs-built_in">allocator</span>&lt;<span class="hljs-type">int</span>&gt;().<span class="hljs-built_in">deallocate</span>(p, <span class="hljs-number">512</span>);<br></code></pre></td></tr></table></figure>
-<blockquote>
-<p>typename()就是临时对象。</p>
-</blockquote>
-<p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc.png" srcset="/img/loading.gif" lazyload alt></p>
-<p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc3.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>BC5下，allocate还是operator new；deallocate还是operator delete。</p>
-<blockquote>
-<p>也没有特殊设计。</p>
-</blockquote>
-<h1 id="alloc"><a href="#alloc" class="headerlink" title="alloc"></a>alloc</h1><p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc4.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>GCC同上，没有特殊设计；回到malloc，可以想到，确实会带来额外开销，因为日常拿到的通常小，即这里的额外“大”是一个比例上的问题。</p>
-<blockquote>
-<p>GCC说明了，SGI STL使用了另一个allocator。</p>
-</blockquote>
-<p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc5.png" srcset="/img/loading.gif" lazyload alt></p>
-<p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc6.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>因为原先设计确实很烂，不如直接malloc；alloc希望好。</p>
-<p>alloc呈现出来的行为分析如上；主要诉求是，减少malloc次数，额外开销主要集中在cookie，用来记大小，free时好办。</p>
-<p>容器元素大小一样，cookie用处就不大了，没有必要。于是GCC的alloc，设计16条链表，每条链表穿起8bit、16、32、…的内存块；容器大小总会调整到8的倍数；如果没有了，alloc去申请后分割；cookie就被舍弃了。</p>
-<blockquote>
-<p>因此，一个粗略估计，对于100万个对象，可以省掉800万字节的cookie。每次去拿大块，还是会有额外资源。</p>
-<p>alloc仍有缺陷，但是影响不大。</p>
-</blockquote>
-<h1 id="pool-alloc"><a href="#pool-alloc" class="headerlink" title="_pool_alloc"></a>_pool_alloc</h1><p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc7.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>4.9并没有沿用alloc，而是到了std::allocator。</p>
-<p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc8.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>可以看到allocator父类是new_allocator；可以看到new_allocator还是operator new、operator delete；4.9又回到了VCBC情况。</p>
-<p><img src="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/alloc9.png" srcset="/img/loading.gif" lazyload alt></p>
-<p>但是alloc还在，已经知道STL有很多扩充的alloc，其中_pool_alloc就是刚刚讨论的alloc。</p>
-<blockquote>
-<p>因为关键点一致，常量8，最大bytes128，free_list也还在。</p>
-</blockquote>
-<p>如果希望使用还是可以用。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">vector&lt;string, _gnu_cxx::_pool_alloc&lt;string&gt;&gt; vector;<br></code></pre></td></tr></table></figure>
-
+                
                 
               </div>
             
@@ -345,34 +283,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Course/" class="category-chain-item">Course</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/C/">#C++</a>
-      
-    </div>
   
 </div>
 
@@ -382,8 +292,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>HJ C++ STL Note 3 Allocator</div>
-      <div>https://ancen.blog/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/</div>
+      <div></div>
+      <div>https://ancen.blog/2023/03/08/HJ-C++-STL-Note-4-STL-List/</div>
     </div>
     <div class="license-meta">
       
@@ -427,9 +337,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/08/HJ-C++-STL-Note-4-STL-List/" title="">
+                      <a href="/2023/03/08/SIKI-Unity-API-Note-1-Event-Functions/" title="SIKI Unity API Note 1 Event Functions">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">SIKI Unity API Note 1 Event Functions</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -437,8 +347,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/08/C++-primer-Note-Allocator/" title="C++ primer Note Allocator">
-                        <span class="hidden-mobile">C++ primer Note Allocator</span>
+                      <a href="/2023/03/08/HJ-C++-STL-Note-3-STL-Allocator/" title="HJ C++ STL Note 3 Allocator">
+                        <span class="hidden-mobile">HJ C++ STL Note 3 Allocator</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
